@@ -1,21 +1,31 @@
 from tkinter import *
 import os
-from loginModule import login
-from registerModule import register
+from loginModule import Login, Register
 
-main_screen = Tk()
+class MainWindow:
+    def __init__(self):
+        self.app = Tk()
+        self.app.title("Tutorin")
+        self.app.geometry('300x250')
+        self.label = Label(self.app, text='Welcome To Tutorin')
+        self.label.place(x=95, y=40)
+        self.login = Button(self.app, text="Login", pady=5, padx=30, command=login)
+        self.login.place(x=100, y=100)
+        self.register = Button(self.app, text="Register", pady=5, padx=20, command=register)
+        self.register.place(x=100, y=150)
 
-def main_account_screen():
-    global main_screen
-    main_screen.geometry("300x250")
-    main_screen.title("Tutorin")
-    Label(text="Select Your Choice", bg="blue", width="300", height="2", font=("Montserrat", 13)).pack()
-    Label(text="").pack()
-    Button(text="Login", height="2", width="30", command=login).pack()
-    Label(text="").pack()
-    Button(text="Register", height="2", width="30", command=register).pack()
- 
-    main_screen.mainloop()
- 
- 
-main_account_screen()
+    def run(self):
+        self.app.mainloop()
+        
+def login():
+    loginTk = Login()
+    loginTk.run()
+
+def register():
+    registerTk = Register()
+    registerTk.run()
+    app = MainWindow()
+    app.run()
+
+app = MainWindow()
+app.run()
