@@ -126,13 +126,13 @@ class Register:
 
         self.contacL = Label(self.registerWindow, text="Contact", font=(10))
         self.contacL.place(x=70, y=300)
-        self.contactS = Entry(self.registerWindow, relief=FLAT)
-        self.contactS.place(x=70, y=320)
+        self.contactE = Entry(self.registerWindow, relief=FLAT)
+        self.contactE.place(x=70, y=320)
 
         self.addressL = Label(self.registerWindow, text="Address", font=(10))
         self.addressL.place(x=70, y=370)
-        self.addressS = Entry(self.registerWindow, relief=FLAT)
-        self.addressS.place(x=70, y=390)
+        self.addressE = Entry(self.registerWindow, relief=FLAT)
+        self.addressE.place(x=70, y=390)
 
         self.addressL = Label(self.registerWindow, text="Jenjang Pendidikan", font=(10))
         self.addressL.place(x=70, y=420)
@@ -178,8 +178,20 @@ class Register:
 
         con = mysql.connect(host="localhost", user="root", password="", database="tutorin")
         cursor = con.cursor()
-        # cursor.execute("insert into user values('','abc','djdjd','jdjdjd','ddjjdjd','ddjjdjd')")
-        cursor.execute("insert into user values('"+ self.username +"','" + self.hashed +"','" + self.name +"','" + self.contact +"','" + self.address +"','" +  "')")
+
+        id = 1;
+        username = self.usernameE.get()
+        password = self.passwordE.get()
+        name = self.nameE.get()
+        contact = self.contactE.get()
+        address = self.addressE.get()
+        balance = 0
+        flag = 0
+        rating = 0
+        # jenjang =  self.jenjangPend.get()
+        # cursor.execute("insert into user values(2,'abc','djdjd','jdjdjd','ddjjdjd','ddjjdjd', 0, 0, 0)")
+        # print("('"+ username +"','" + password +"','" + name +"','" + contact +"','" + address, balance, flag, rating +"')")
+        cursor.execute("insert into user(username, password, nama, kontak, alamat) values('"+ username +"','" + password +"','" + name +"','" + contact +"','" + address +"')")
         cursor.execute('commit')
         messagebox.showinfo('Successful', 'Username was added')
         con.close()
