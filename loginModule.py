@@ -33,11 +33,18 @@ class Login:
         self.passwordE = Entry(self.loginWindow, show='*', relief=FLAT)
         self.passwordE.place(x=70, y=120)
         # Actual Variales
+<<<<<<< HEAD
 
+=======
+        self.username = self.usernameS.get()
+        self.password = self.passwordS.get()
+        print(self.password)
+>>>>>>> efc935a06774c698b6eb8015a56f74ca68809e4b
         self.submit = Button(self.loginWindow, text='Submit', pady=5, padx=20, command=self.validate)
         self.submit.place(x=100, y=150)
 
     def validate(self):
+<<<<<<< HEAD
         con = mysql.connect(host="localhost", user="root", password="", database="tutorin")
         cursor = con.cursor()
         cursor.execute("select * from user where username= '"+ self.usernameE.get() +"'")
@@ -45,6 +52,16 @@ class Login:
         if len(rows) > 0 : 
             messagebox.showinfo('Successful', 'Login was sucessful')
         else : 
+=======
+        data = (self.usernameE.get(),)
+        inputData = (self.usernameE.get(), self.passwordE.get(),)
+        try:
+            if (db.validateData(data, inputData)):
+                messagebox.showinfo('Successful', 'Login was sucessful')
+            else:
+                messagebox.showerror('Error', 'Wrong Credentials')
+        except IndexError:
+>>>>>>> efc935a06774c698b6eb8015a56f74ca68809e4b
             messagebox.showerror('Error', 'Wrong Credentials')
         # cursor.execute("insert into user values('"+ self.username +"','" + self.hashed +"','" + self.name +"','" + self.contact +"','" + self.address +"','" +  "')")
         # cursor.execute('commit')
@@ -66,7 +83,19 @@ class Login:
         self.loginWindow.mainloop()
 
 
+# def comboClick():
+#     self.fareS = StringVar()
+#     self.ktpS = StringVar()
 
+#     self.fareL = Label(self.registerWindow, text="Fare", font=(10))
+#     self.fareL.place(x=70, y=420)
+#     self.fareS = Entry(self.registerWindow, relief=FLAT, textvariable=self.fareS)
+#     self.fareS.place(x=70, y=440)  
+
+#     self.ktpL = Label(self.registerWindow, text="Fare", font=(10))
+#     self.ktpL.place(x=70, y=420)
+#     self.ktpE = Entry(self.registerWindow, relief=FLAT, textvariable=self.ktpS)
+#     self.ktpE.place(x=70, y=440) 
 
 class Register:
     '''
@@ -89,8 +118,8 @@ class Register:
         self.categ.current(0)
         
         self.categ.place(x=110, y=60)
-        if (self.categ.get() == "Tutor"):
-            self.categ.bind("<<ComboBoxSelected>>", self.comboClick)
+        # if (self.categ.get() == "Tutor"):
+        #     self.categ.bind("", comboClick)
 
         # self.usernameS = StringVar()
         # self.passwordS = StringVar()
@@ -115,6 +144,7 @@ class Register:
 
         self.contacL = Label(self.registerWindow, text="Contact", font=(10))
         self.contacL.place(x=70, y=300)
+<<<<<<< HEAD
         self.contactS = Entry(self.registerWindow, relief=FLAT)
         self.contactS.place(x=70, y=320)
 
@@ -122,6 +152,15 @@ class Register:
         self.addressL.place(x=70, y=370)
         self.addressS = Entry(self.registerWindow, relief=FLAT)
         self.addressS.place(x=70, y=390)
+=======
+        self.contactE = Entry(self.registerWindow, relief=FLAT, textvariable=self.contactS)
+        self.contactE.place(x=70, y=320)
+
+        self.addressL = Label(self.registerWindow, text="Address", font=(10))
+        self.addressL.place(x=70, y=370)
+        self.addressE = Entry(self.registerWindow, relief=FLAT, textvariable=self.addressS)
+        self.addressE.place(x=70, y=390)
+>>>>>>> efc935a06774c698b6eb8015a56f74ca68809e4b
 
         self.addressL = Label(self.registerWindow, text="Jenjang Pendidikan", font=(10))
         self.addressL.place(x=70, y=420)
@@ -132,11 +171,12 @@ class Register:
         self.jenjangPend.current(0)
         self.jenjangPend.place(x=70, y=440)
         
-
         self.submit = Button(self.registerWindow, text='Submit', pady=5, padx=20, command=self.add)
         self.submit.place(x=110, y=430)
+            
         # Actual Variables
         # self.username = self.usernameS.get()
+<<<<<<< HEAD
         # self.password = self.passwordS.get()
         # self.name = self.nameS.get()
         # self.contact = self.contactS.get()
@@ -158,11 +198,27 @@ class Register:
         self.ktpL.place(x=70, y=420)
         self.ktpE = Entry(self.registerWindow, relief=FLAT, textvariable=self.ktpS)
         self.ktpE.place(x=70, y=440) 
+=======
+        # print('ini username '+self.username)
+        # self.password = self.passwordS.get()
+        # print('ini password '+self.password)
+        # self.name = self.nameS.get()
+        # print('ini nama '+self.name)
+        # self.contact = self.contactS.get()
+        # print('ini contact '+self.contact)
+        # self.address = self.addressS.get()
+        # print('ini address '+self.address)
+ 
+        # self.salt = bcrypt.gensalt()
+        # self.hashed = bcrypt.hashpw(self.password.encode(), self.salt)
+>>>>>>> efc935a06774c698b6eb8015a56f74ca68809e4b
 
+        
     def run(self):
         self.registerWindow.mainloop()
 
     def add(self):
+<<<<<<< HEAD
 
         con = mysql.connect(host="localhost", user="root", password="", database="tutorin")
         cursor = con.cursor()
@@ -181,3 +237,15 @@ class Register:
         #     messagebox.showinfo('Successful', 'Username was added')
         # else:
         #     messagebox.showwarning("Warning", 'Username already exists')
+=======
+        data = (self.usernameE.get(),)
+        result = db.searchData(data)
+        print(result)
+        if result != 0:
+            data = (self.usernameE.get(), self.passwordE.get(), self.nameE.get(), self.contactE.get(), self.addressE.get())
+            print(data)
+            db.insertData(data)
+            messagebox.showinfo('Successful', 'Username was added')
+        else:
+            messagebox.showwarning("Warning", 'Username already exists')
+>>>>>>> efc935a06774c698b6eb8015a56f74ca68809e4b

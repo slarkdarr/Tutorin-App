@@ -30,19 +30,20 @@ class Database:
         rating Float NOT NULL DEFAULT 0
         );
         '''
+
         create_table_tutor = '''
         CREATE TABLE IF NOT EXISTS tutor(
-        username TEXT NOT NULL,
+        username TEXT PRIMARY KEY NOT NULL,
         jenjang TEXT NOT NULL,
         tarif Integer NOT NULL,
         noKTP TEXT NOT NULL,
         pengalaman TEXT NOT NULL,
         pendidikan TEXT NOT NULL,
         headline TEXT NOT NULL DEFAULT '',
-        PRIMARY KEY(username),
         FOREIGN KEY (username) REFERENCES user(username) ON DELETE CASCADE ON UPDATE CASCADE
         );
         '''
+
         create_table_bidang = '''
         CREATE TABLE IF NOT EXISTS bidang(
         username TEXT NOT NULL,
@@ -51,6 +52,7 @@ class Database:
         foreign key (username) references user(username) on delete cascade on update cascade    
         );
         '''
+
         self.curr.execute(create_table_user)
         self.curr.execute(create_table_tutor)
         self.curr.execute(create_table_bidang)
@@ -87,8 +89,12 @@ class Database:
         '''
         self.curr.execute(search_data, data)
         rows = self.curr.fetchall()
+        print(data)
+        print(rows)
         if rows == []:
+            print("username available")
             return 1
+        print('username is not available')
         return 0
         
     def validateData(self, data, inputData):
@@ -102,5 +108,6 @@ class Database:
         '''
         self.curr.execute(validate_data, data)
         row = self.curr.fetchall()
+        print(row)
         if row[0][1] == inputData[0]:
-            return row[0][2] == bcrypt.hashpw(inputData[1].encode(), row[0][2])
+            return row[0][2] == inputData[1]
