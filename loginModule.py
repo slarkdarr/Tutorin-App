@@ -114,12 +114,12 @@ class Register:
 
         self.contacL = Label(self.registerWindow, text="Contact", font=(10))
         self.contacL.place(x=70, y=300)
-        self.contactE = Entry(self.registerWindow, relief=FLAT, textvariable=self.contactS)
+        self.contactE = Entry(self.registerWindow, relief=FLAT)
         self.contactE.place(x=70, y=320)
 
         self.addressL = Label(self.registerWindow, text="Address", font=(10))
         self.addressL.place(x=70, y=370)
-        self.addressE = Entry(self.registerWindow, relief=FLAT, textvariable=self.addressS)
+        self.addressE = Entry(self.registerWindow, relief=FLAT)
         self.addressE.place(x=70, y=390)
 
         self.addressL = Label(self.registerWindow, text="Jenjang Pendidikan", font=(10))
@@ -154,13 +154,33 @@ class Register:
         self.registerWindow.mainloop()
 
     def add(self):
-        data = (self.usernameE.get(),)
-        result = db.searchData(data)
-        print(result)
-        if result != 0:
-            data = (self.usernameE.get(), self.passwordE.get(), self.nameE.get(), self.contactE.get(), self.addressE.get())
-            print(data)
-            db.insertData(data)
-            messagebox.showinfo('Successful', 'Username was added')
-        else:
-            messagebox.showwarning("Warning", 'Username already exists')
+
+        con = mysql.connect(host="localhost", user="root", password="", database="tutorin")
+        cursor = con.cursor()
+
+        id = 1;
+        username = self.usernameE.get()
+        password = self.passwordE.get()
+        name = self.nameE.get()
+        contact = self.contactE.get()
+        address = self.addressE.get()
+        balance = 0
+        flag = 0
+        rating = 0
+        # jenjang =  self.jenjangPend.get()
+        # cursor.execute("insert into user values(2,'abc','djdjd','jdjdjd','ddjjdjd','ddjjdjd', 0, 0, 0)")
+        # print("('"+ username +"','" + password +"','" + name +"','" + contact +"','" + address, balance, flag, rating +"')")
+        cursor.execute("insert into user(username, password, nama, kontak, alamat) values('"+ username +"','" + password +"','" + name +"','" + contact +"','" + address +"')")
+        cursor.execute('commit')
+        messagebox.showinfo('Successful', 'Username was added')
+        con.close()
+
+        # data = (self.username,)
+        # result = db.searchData(data)
+        # print(result)
+        # if result != 0:
+        #     data = (self.username, self.hashed, self.name, self.contact, self.address)
+        #     db.insertData(data)
+        #     messagebox.showinfo('Successful', 'Username was added')
+        # else:
+        #     messagebox.showwarning("Warning", 'Username already exists')
