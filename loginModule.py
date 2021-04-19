@@ -51,19 +51,7 @@ class Login:
         self.loginWindow.mainloop()
 
 
-def comboClick():
-    self.fareS = StringVar()
-    self.ktpS = StringVar()
 
-    self.fareL = Label(self.registerWindow, text="Fare", font=(10))
-    self.fareL.place(x=70, y=420)
-    self.fareS = Entry(self.registerWindow, relief=FLAT, textvariable=self.fareS)
-    self.fareS.place(x=70, y=440)  
-
-    self.ktpL = Label(self.registerWindow, text="Fare", font=(10))
-    self.ktpL.place(x=70, y=420)
-    self.ktpE = Entry(self.registerWindow, relief=FLAT, textvariable=self.ktpS)
-    self.ktpE.place(x=70, y=440) 
 
 class Register:
     '''
@@ -87,7 +75,7 @@ class Register:
         
         self.categ.place(x=110, y=60)
         if (self.categ.get() == "Tutor"):
-            self.categ.bind("", comboClick)
+            self.categ.bind("<<ComboBoxSelected>>", self.comboClick)
 
         self.usernameS = StringVar()
         self.passwordS = StringVar()
@@ -123,16 +111,13 @@ class Register:
         self.addressL = Label(self.registerWindow, text="Jenjang Pendidikan", font=(10))
         self.addressL.place(x=70, y=420)
         self.jenjangPendClicked = StringVar()
-        self.jenjangPend = Combobox(self.registerWindow, state="readonly", width = 5, textvariable=self.clicked)
+        self.jenjangPend = Combobox(self.registerWindow, state="readonly", width = 5, textvariable=self.jenjangPendClicked)
         self.jenjangPend['values'] = ("SD", "SMP", "SMA")
         # self.categ.grid(column=2, row=4)
         self.jenjangPend.current(0)
         self.jenjangPend.place(x=70, y=440)
         
-             
 
-
-        
         self.submit = Button(self.registerWindow, text='Submit', pady=5, padx=20, command=self.add)
         self.submit.place(x=110, y=430)
         # Actual Variables
@@ -145,7 +130,19 @@ class Register:
         self.salt = bcrypt.gensalt()
         self.hashed = bcrypt.hashpw(self.password.encode(), self.salt)
 
+    def comboClick(self, event):
+        self.fareS = IntVar()
+        self.ktpS = StringVar()
 
+        self.fareL = Label(self.registerWindow, text="Fare", font=(10))
+        self.fareL.place(x=70, y=420)
+        self.fareS = Entry(self.registerWindow, relief=FLAT, textvariable=self.fareS)
+        self.fareS.place(x=70, y=440)  
+
+        self.ktpL = Label(self.registerWindow, text="Fare", font=(10))
+        self.ktpL.place(x=70, y=420)
+        self.ktpE = Entry(self.registerWindow, relief=FLAT, textvariable=self.ktpS)
+        self.ktpE.place(x=70, y=440) 
 
     def run(self):
         self.registerWindow.mainloop()
@@ -155,7 +152,7 @@ class Register:
         result = db.searchData(data)
         print(result)
         if result != 0:
-            data = (self.username, self.hashed)
+            data = (self.username, self.hashed, self.name, self.contact, self.address)
             db.insertData(data)
             messagebox.showinfo('Successful', 'Username was added')
         else:
