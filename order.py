@@ -1,9 +1,10 @@
 from datetime import datetime
 import tkinter as tk
+import tkinter.messagebox
 from tkinter.ttk import *
 
 class Pemesanan(tk.Frame):
-	def __init__(self, master=None, orderID=1234567890, muridID=1234567890, tutorID=1234567890, courseID=1234567890, waktuMengajar=datetime.now(), nominal=0, statusPembayaran=False):
+	def __init__(self, master=None, orderID=12345678, muridID=12345678, tutorID=12345678, courseID=12345678, waktuMengajar=datetime.now(), nominal=0, statusPembayaran=False):
 		super().__init__(master)
 		self.master = master
 
@@ -16,7 +17,7 @@ class Pemesanan(tk.Frame):
 		self.statusPembayaran = statusPembayaran
 		
 		master.title("Form Pembayaran")
-		master.geometry("500x500")
+		master.geometry("500x600")
 		self.pack()
 		self.inputForm()
 
@@ -35,7 +36,6 @@ class Pemesanan(tk.Frame):
 
 		self.fields = ("Order ID", "Murid ID", "Tutor ID", "Course ID", "Waktu Mengajar", "Nominal")
 
-		# Style().configure("OrderID", padding=5, relief="flat")
 		for field in self.fields:
 			self.row = Frame(self)
 			self.label1 = tk.Label(self.row, width=25, text=field, anchor='w')
@@ -43,38 +43,55 @@ class Pemesanan(tk.Frame):
 			self.row.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
 			self.label1.pack(side=tk.LEFT)
 			self.label2.pack(side=tk.RIGHT)
-			# self.murid_id = tk.Label(self, width=25, text = "Murid ID", anchor='w')
-			# self.order_id.pack(side=tk.LEFT)
 
 		self.bank = ("Mandiri", "BCA", "BRI", "BNI", "CIMB Niaga")
 
 		self.variable = tk.StringVar(self)
 		self.variable.set("Pilih Bank")
-		# menuFrame = Frame(self)
+
 		self.ddmenu = tk.OptionMenu(self, self.variable, *self.bank)
 		self.ddmenu.pack()
 
+		self.lbl = Frame(self)
+		self.descLabel = tk.Label(self.lbl)
+
 		def showDesc(*args):
-			self.desc = """
-			1. Silakan transfer nominal pembayaran melalui ATM, Internet Banking, Mobile Banking, atau SMS Banking\n
-			2. Masukkan Nominal Pembayaran yang sesuai dengan form pembayaran ditambah kode unik, yaitu "011"\n
-			Contoh : Nominal Pembayaran : Rp100.000,00\n
-			Jumlah yang harus ditransfer : 100011\n
-			3. Sertakan juga Berita Transfer yang tertera pada form pembayaran\n
-			4. Klik "Konfirmasi Bayar"\n
-			"""
-			self.lbl = Frame(self)
-			self.descLabel = tk.Label(self.lbl, text=self.desc, justify=tk.CENTER)
-			self.lbl.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
+			self.desc = f"""
+				1. Silakan transfer nominal pembayaran melalui ATM, Internet Banking, Mobile Banking, atau SMS Banking\n
+				2. Masukkan Nominal Pembayaran yang sesuai dengan form pembayaran ditambah kode unik, yaitu "011"\n
+				Nominal Pembayaran Anda : {Pemesanan.getNominal(self)}\n
+				Jumlah yang harus ditransfer : {Pemesanan.getNominal(self)+11}\n
+				3. Sertakan juga Berita Transfer yang tertera pada form pembayaran\n
+				4. Klik "Konfirmasi Bayar"\n
+				"""
+			self.descLabel.destroy()
+			self.lbl.place(x=100, y=100)
+			self.lbl.pack(side=tk.BOTTOM, padx=0, pady=0)
+			self.descLabel = tk.Label(self.lbl, text=self.desc)
 			self.descLabel.pack()
 
 		# self.descLabel = tk.Label(self, text=self.desc)
 		self.variable.trace('w', showDesc)
 		# self.descLabel.pack()
 
-	# def sendForm():
-	# 	pass
+	def submit(self):
+		def submitCallBack():
+			tkinter.messagebox.showinfo("Ordered", "Pemesanan telah diterima")
+		def cancelCallBack():
+			tkinter.messagebox.showinfo("Canceled", "Pemesanan telah dibatalkan")
+		self.btnFrame = Frame(self)
+		self.submitBtn = Button(self.btnFrame, text="Order", command=submitCallBack)
+		self.cancelBtn = Button(self.btnFrame, text="Cancel", command=cancelCallBack)
+		
+		self.btnFrame.pack(side=tk.BOTTOM, padx=10, pady=10)
+		self.submitBtn.pack(side=tk.LEFT, padx=10, pady=5)
+		self.cancelBtn.pack(side=tk.RIGHT, padx=10, pady=5)
 
-window = tk.Tk()
-app = Pemesanan(master=window)
-app.mainloop()
+	def sendForm():
+		window = tk.Tk()
+		app = Pemesanan(master=window)
+		app.submit()
+		app.modifyStatusPembayaran(True)
+		app.mainloop()
+
+Pemesanan.sendForm()

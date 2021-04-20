@@ -1,0 +1,16 @@
+CREATE TABLE Pemesanan (
+	OrderID int,
+	MuridID int,
+	TutorID int,
+	CourseID int,
+	WaktuMengajar datetime,
+	Nominal int,
+	StatusPembayaran number(1),
+	primary key (OrderID, MuridID, TutorID, CourseID),
+	constraint FK_muridID
+		foreign key (MuridID) references murid(MuridID)
+		on update cascade on delete cascade,
+	constraint FK_tutorID
+		foreign key (TutorID) references tutor(TutorID)
+		on update cascade on delete cascade
+	);
