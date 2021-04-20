@@ -67,22 +67,7 @@ class Login:
     def run(self):
         self.loginWindow.mainloop()
 
-
-# def comboClick():
-#     self.fareS = StringVar()
-#     self.ktpS = StringVar()
-
-#     self.fareL = Label(self.registerWindow, text="Fare", font=(10))
-#     self.fareL.place(x=70, y=420)
-#     self.fareS = Entry(self.registerWindow, relief=FLAT, textvariable=self.fareS)
-#     self.fareS.place(x=70, y=440)  
-
-#     self.ktpL = Label(self.registerWindow, text="Fare", font=(10))
-#     self.ktpL.place(x=70, y=420)
-#     self.ktpE = Entry(self.registerWindow, relief=FLAT, textvariable=self.ktpS)
-#     self.ktpE.place(x=70, y=440) 
-
-class Register:
+class RegisterTutor:
     '''
     Class for Register
     @param username
@@ -92,21 +77,9 @@ class Register:
         self.registerWindow = Tk()
         self.registerWindow.title('Register')
         self.registerWindow.geometry('300x800')
-        self.label = Label(self.registerWindow, text='Register')
+        self.label = Label(self.registerWindow, text='Register as Tutor')
         self.label.place(x=110, y=40)
-        # Tkinter Stuff
-        # dropdown select account type
-        self.clicked = StringVar()
-        self.categ = Combobox(self.registerWindow, state="readonly", width = 5, textvariable=self.clicked)
-        self.categ['values'] = ("Tutor", "Murid")
-        # self.categ.grid(column=2, row=4)
-        self.categ.current(1)
-        
-        self.categ.place(x=110, y=60)
-        if (self.categ.get() == "Tutor"):
-            self.categ.bind("<<ComboboxSelected>>", self.comboClick)
-        else :
-            self.categ.bind("<<ComboboxSelected1>>", self.comboHide)
+        self.label.pack(side=TOP, padx=70, pady= 10)
 
         self.usernameS = StringVar()
         self.passwordS = StringVar()
@@ -115,74 +88,231 @@ class Register:
         self.addressS = StringVar()
 
         self.usernameL = Label(self.registerWindow, text="Username", font=(10))
-        self.usernameL.place(x=70, y=90)
+        # self.usernameL.place(x=70, y=90)
+        self.usernameL.pack(side=TOP, padx=50)
         self.usernameE = Entry(self.registerWindow, relief=FLAT, textvariable=self.usernameS)
-        self.usernameE.place(x=70, y=110)
+        # self.usernameE.place(x=70, y=110)
+        self.usernameE.pack(side=TOP, padx=70)
 
         self.passwordL = Label(self.registerWindow, text="Password", font=(10))
-        self.passwordL.place(x=70, y=160)
+        # self.passwordL.place(x=70, y=160)
+        self.passwordL.pack(side=TOP, padx=70)
         self.passwordE = Entry(self.registerWindow, show='*', relief=FLAT, textvariable=self.passwordS)
-        self.passwordE.place(x=70, y=180)
+        # self.passwordE.place(x=70, y=180)
+        self.passwordE.pack(side=TOP, padx=70)
 
         self.nameL = Label(self.registerWindow, text="Name", font=(10))
-        self.nameL.place(x=70, y=230)
+        # self.nameL.place(x=70, y=230)
+        self.nameL.pack(side=TOP, padx=70)
         self.nameE = Entry(self.registerWindow, relief=FLAT, textvariable=self.nameS)
-        self.nameE.place(x=70, y=250)
+        # self.nameE.place(x=70, y=250)
+        self.nameE.pack(side=TOP, padx=70)
 
         self.contacL = Label(self.registerWindow, text="Contact", font=(10))
-        self.contacL.place(x=70, y=300)
+        # self.contacL.place(x=70, y=300)
+        self.contacL.pack(side=TOP, padx=70)
         self.contactE = Entry(self.registerWindow, relief=FLAT)
-        self.contactE.place(x=70, y=320)
+        # self.contactE.place(x=70, y=320)
+        self.contactE.pack(side=TOP, padx=70)
 
         self.addressL = Label(self.registerWindow, text="Address", font=(10))
-        self.addressL.place(x=70, y=370)
+        # self.addressL.place(x=70, y=370)
+        self.addressL.pack(side=TOP, padx=70)
         self.addressE = Entry(self.registerWindow, relief=FLAT)
-        self.addressE.place(x=70, y=390)
+        # self.addressE.place(x=70, y=390)
+        self.addressE.pack(side=TOP, padx=70)
 
         self.jenjangPendL = Label(self.registerWindow, text="Jenjang Pendidikan", font=(10))
-        self.jenjangPendL.place(x=70, y=420)
+        # self.jenjangPendL.place(x=70, y=420)
+        self.jenjangPendL.pack(side=TOP, padx=70)
         self.jenjangPendClicked = StringVar()
         self.jenjangPend = Combobox(self.registerWindow, state="readonly", width = 5, textvariable=self.jenjangPendClicked)
         self.jenjangPend['values'] = ("SD", "SMP", "SMA")
         # self.categ.grid(column=2, row=4)
         self.jenjangPend.current(0)
-        self.jenjangPend.place(x=70, y=440)
+        # self.jenjangPend.place(x=70, y=440)
+        self.jenjangPend.pack(side=TOP, padx=70)
+
+        self.fareS = IntVar()
+        self.ktpS = StringVar()
+        self.expS = StringVar()
+        self.headlineS = StringVar()
+
+        # self.fareL = Label(self.registerWindow, text="Fare", font=(10))
+        # # self.fareL.place(x=70, y=490)
+        # self.fareL.pack(side=TOP, padx=70)
+        # self.fareE = Entry(self.registerWindow, relief=FLAT, textvariable=self.fareS)
+        # # self.fareE.place(x=70, y=510) 
+        # self.fareE.pack(side=TOP, padx=70) 
+
+        self.ktpL = Label(self.registerWindow, text="KTP", font=(10))
+        # self.ktpL.place(x=70, y=560)
+        self.ktpL.pack(side=TOP, padx=70)
+        self.ktpE = Entry(self.registerWindow, relief=FLAT, textvariable=self.ktpS)
+        # self.ktpE.place(x=70, y=580) 
+        self.ktpE.pack(side=TOP, padx=70)
+
+        self.expL = Label(self.registerWindow, text="Experience", font=(10))
+        # self.ktpL.place(x=70, y=560)
+        self.expL.pack(side=TOP, padx=70)
+        self.expE = Entry(self.registerWindow, relief=FLAT, textvariable=self.expS)
+        # self.ktpE.place(x=70, y=580) 
+        self.expE.pack(side=TOP, padx=70)
+
+        self.pendL = Label(self.registerWindow, text="Education", font=(10))
+        # self.ktpL.place(x=70, y=560)
+        self.pendL.pack(side=TOP, padx=70)
+        self.PendClicked = StringVar()
+        self.Pend = Combobox(self.registerWindow, state="readonly", width = 5, textvariable=self.PendClicked)
+        self.Pend['values'] = ("SMA", "S1", "S2", "S3")
+        # self.categ.place(relx=0.1, rely=4)
+        self.Pend.current(0)
+        # self.Pend.place(x=110, y=60)
+        self.Pend.pack(side=TOP)
+
+        self.headlineL = Label(self.registerWindow, text="Headline", font=(10))
+        # self.ktpL.place(x=70, y=560)
+        self.headlineL.pack(side=TOP, padx=70)
+        self.headlineE = Entry(self.registerWindow, relief=FLAT, textvariable=self.headlineS)
+        # self.ktpE.place(x=70, y=580) 
+        self.headlineE.pack(side=TOP, padx=70)
         
         self.submit = Button(self.registerWindow, text='Submit', pady=5, padx=20, command=self.add)
-        self.submit.place(x=110, y=630)
+        # self.submit.place(x=110, y=630)
+        self.submit.pack(side=TOP, padx=70, pady=10)
             
-    def comboClick(self, event):
-        self.fareS = StringVar()
-        self.ktpS = StringVar()
-
-        self.fareL = Label(self.registerWindow, text="Fare", font=(10))
-        self.fareL.place(x=70, y=490)
-        self.fareE = Entry(self.registerWindow, relief=FLAT, textvariable=self.fareS)
-        self.fareE.place(x=70, y=510)  
-
-        self.ktpL = Label(self.registerWindow, text="KTP", font=(10))
-        self.ktpL.place(x=70, y=560)
-        self.ktpE = Entry(self.registerWindow, relief=FLAT, textvariable=self.ktpS)
-        self.ktpE.place(x=70, y=580) 
+        
+    def run(self):
+        self.registerWindow.mainloop()
     
-    def comboHide(self, event):
-        self.fareS = StringVar()
-        self.ktpS = StringVar()
+    def searchData(self, username):
+        con = mysql.connect(host="localhost", user="root", password="root", database="tutorin")
+        cursor = con.cursor()
 
-        self.fareL = Label(self.registerWindow, text="Fare", font=(10))
-        self.fareL.place(x=70, y=490)
-        self.fareE = Entry(self.registerWindow, relief=FLAT, textvariable=self.fareS)
-        self.fareE.place(x=70, y=510)  
+        cursor.execute("SELECT * FROM user WHERE username ='"+username+"'")
+        row = cursor.fetchall()
+        print(row)
+        if row == []:
+            return 1
+        return 0
 
-        self.ktpL = Label(self.registerWindow, text="KTP", font=(10))
-        self.ktpL.place(x=70, y=560)
-        self.ktpE = Entry(self.registerWindow, relief=FLAT, textvariable=self.ktpS)
-        self.ktpE.place(x=70, y=580) 
+    def add(self):
 
-        self.fareL.destroy()
-        self.fareE.destroy()
-        self.ktpL.destroy()
-        self.ktpE.destroy()
+        con = mysql.connect(host="localhost", user="root", password="root", database="tutorin")
+        cursor = con.cursor()
+
+        id = 1;
+        username = self.usernameE.get()
+        password = self.passwordE.get()
+        name = self.nameE.get()
+        contact = self.contactE.get()
+        address = self.addressE.get()
+        balance = 0
+        flag = 0
+        rating = 0
+        jenjPend = self.jenjangPend.get()
+        ktp = self.ktpE.get()
+        xp = self.expE.get()
+        ed = self.Pend.get()
+        hl = self.headlineE.get()
+        # jenjang =  self.jenjangPend.get()
+        # cursor.execute("insert into user values(2,'abc','djdjd','jdjdjd','ddjjdjd','ddjjdjd', 0, 0, 0)")
+        # print("('"+ username +"','" + password +"','" + name +"','" + contact +"','" + address, balance, flag, rating +"')")
+        if (self.searchData(username)):
+            cursor.execute("insert into user(username, password, nama, kontak, alamat) values('"+ username +"','" + password +"','" + name +"','" + contact +"','" + address +"')")
+            cursor.execute('commit')
+            cursor.execute("insert into tutor(username, jenjang, noKTP, pengalaman, pendidikan, headline) values('"+ username +"','" + jenjPend +"','" + ktp +"','" + xp +"','" + ed +"','"+ hl +"')")
+            cursor.execute('commit')
+            messagebox.showinfo('Successful', 'Username was added')
+        else :
+            messagebox.showwarning("Warning", 'Username already exists')
+
+        con.close()
+
+class RegisterMurid:
+    '''
+    Class for Register
+    @param username
+    @param password
+    '''
+    def __init__(self):
+        self.registerWindow = Tk()
+        self.registerWindow.title('Register')
+        self.registerWindow.geometry('300x800')
+        self.label = Label(self.registerWindow, text='Register as Murid')
+        self.label.place(x=110, y=40)
+        self.label.pack(side=TOP, padx=70, pady= 10)
+        # Tkinter Stuff
+        # dropdown select account type
+        # self.clicked = StringVar()
+        # self.categ = Combobox(self.registerWindow, state="readonly", width = 5, textvariable=self.clicked)
+        # self.categ['values'] = ("Tutor", "Murid")
+        # # self.categ.place(relx=0.1, rely=4)
+        # self.categ.current(1)
+        # self.categ.place(x=110, y=60)
+        # self.categ.pack(side=TOP, pady=20)
+
+        # if (self.categ.get() == "Tutor"):
+        #     self.categ.bind("<<ComboboxSelected>>", self.comboClick)
+        # else :
+        #     self.categ.bind("<<ComboboxSelected>>", self.comboHide)
+
+        self.usernameS = StringVar()
+        self.passwordS = StringVar()
+        self.nameS = StringVar()
+        self.contactS = StringVar()
+        self.addressS = StringVar()
+
+        self.usernameL = Label(self.registerWindow, text="Username", font=(10))
+        # self.usernameL.place(x=70, y=90)
+        self.usernameL.pack(side=TOP, padx=50)
+        self.usernameE = Entry(self.registerWindow, relief=FLAT, textvariable=self.usernameS)
+        # self.usernameE.place(x=70, y=110)
+        self.usernameE.pack(side=TOP, padx=70)
+
+        self.passwordL = Label(self.registerWindow, text="Password", font=(10))
+        # self.passwordL.place(x=70, y=160)
+        self.passwordL.pack(side=TOP, padx=70)
+        self.passwordE = Entry(self.registerWindow, show='*', relief=FLAT, textvariable=self.passwordS)
+        # self.passwordE.place(x=70, y=180)
+        self.passwordE.pack(side=TOP, padx=70)
+
+        self.nameL = Label(self.registerWindow, text="Name", font=(10))
+        # self.nameL.place(x=70, y=230)
+        self.nameL.pack(side=TOP, padx=70)
+        self.nameE = Entry(self.registerWindow, relief=FLAT, textvariable=self.nameS)
+        # self.nameE.place(x=70, y=250)
+        self.nameE.pack(side=TOP, padx=70)
+
+        self.contacL = Label(self.registerWindow, text="Contact", font=(10))
+        # self.contacL.place(x=70, y=300)
+        self.contacL.pack(side=TOP, padx=70)
+        self.contactE = Entry(self.registerWindow, relief=FLAT)
+        # self.contactE.place(x=70, y=320)
+        self.contactE.pack(side=TOP, padx=70)
+
+        self.addressL = Label(self.registerWindow, text="Address", font=(10))
+        # self.addressL.place(x=70, y=370)
+        self.addressL.pack(side=TOP, padx=70)
+        self.addressE = Entry(self.registerWindow, relief=FLAT)
+        # self.addressE.place(x=70, y=390)
+        self.addressE.pack(side=TOP, padx=70)
+
+        self.jenjangPendL = Label(self.registerWindow, text="Jenjang Pendidikan", font=(10))
+        # self.jenjangPendL.place(x=70, y=420)
+        self.jenjangPendL.pack(side=TOP, padx=70)
+        self.jenjangPendClicked = StringVar()
+        self.jenjangPend = Combobox(self.registerWindow, state="readonly", width = 5, textvariable=self.jenjangPendClicked)
+        self.jenjangPend['values'] = ("SD", "SMP", "SMA")
+        # self.categ.grid(column=2, row=4)
+        self.jenjangPend.current(0)
+        # self.jenjangPend.place(x=70, y=440)
+        self.jenjangPend.pack(side=TOP, padx=70)
+        
+        self.submit = Button(self.registerWindow, text='Submit', pady=5, padx=20, command=self.add)
+        # self.submit.place(x=110, y=630)
+        self.submit.pack(side=TOP, pady=10)
+            
         
         
     def run(self):
