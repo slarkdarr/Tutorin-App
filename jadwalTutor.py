@@ -1,6 +1,8 @@
 import tkinter as tk
+from tkinter import messagebox
 import csv
 import sqlite3
+
 
 def getIntJam(jam):
     value = 0
@@ -32,15 +34,37 @@ def getIntJam(jam):
         value = 20
     return value
 
+def PrintArray(arr):
+    for x in arr:
+        print(x)
+
+def getID(data, mapel, ting, jen):
+    for x in data:
+        if(x[1] == mapel and x[2] == jen and x[3] == ting):
+            return x[0]
+    return 0
+
+def getID2(data, data2) :
+    for x in data:
+        if(x == data2):
+            return x[0]
+    return 0
+
+def message(title, text):
+   tk.MessageBox.showinfo(title, text)
+
 def saveForm():
+    conn = sqlite3.connect('Tutorin.db')
+    c = conn.cursor()
+
     id = textbox1.get()
     nama = textbox3.get()
-    jenjang = ""
+    jen = ""
     if(int(varje.get()) == 1) :
-        jenjang = "SMP"
+        jen = "SMP"
     elif(int(varje.get()) == 2) :
-        jenjang = "SMA"
-    tingkat = varting.get()
+        jen = "SMA"
+    ting = varting.get()
     mapel = varmapel.get()
     durasi = vardur.get()
     hari = varhari.get()
@@ -49,18 +73,30 @@ def saveForm():
     if(desc == ""):
         desc = "Tidak Ada"
     #id, nama, jenjang, tingkat, mapel, durasi, hari, jam, des
-    if(id=="" or nama=="" or jenjang=="" or tingkat==0 or durasi==0):
-        print("gagal")
+    if(id=="" or nama=="" or jen=="" or ting==0 or durasi==0):
+        #show messagebox
+        messagebox.showerror("Error", "Gagal Meyimpan Data.\nCek Kembali Data Anda!")
+        #print("gagal")
     else:
-        newrow=[id,nama,jenjang,tingkat,mapel,durasi,hari,jam,desc]
-        with open(r'DatabaseJadwalTutor.csv', 'a', newline='') as appendobj :
-            append=csv.writer(appendobj)
-            append.writerow(newrow)
-        print("sukses")
+        #dapetin IDcourse
+        c.execute("SELECT rowid, * FROM DetailCourse")
+        data = c.fetchall()
+        courseid = getID(data, mapel, str(ting), jen)
+
+        #print(courseid)
+        nrow = [id,courseid,hari,jam,durasi,desc]
+        #insert data to database
+        c.execute("INSERT INTO JadwalTutor VALUES (?,?,?,?,?,?)", nrow)
+        #show messagebox
+        messagebox.showinfo("Info", "Berhasil Menyimpan Data")
+        #print("sukses")
+    conn.commit()
+    conn.close()
 
 def raise_frame(fname):
     fname.tkraise()
     
+
 
 HEIGHT = 670
 WIDTH = 800
@@ -178,62 +214,64 @@ button2 = tk.Button(frame, text="Back", bd=2, command=lambda:raise_frame(frame2)
 button2.place(relx=0.65, rely=0.8)
 
 #======frame2=====
-listschedule = []
-
 def showSchedule(list) :
+    conn = sqlite3.connect('Tutorin.db')
+    c = conn.cursor()
+
     #tampilkan schedule dari tutor
     id = textboxf1.get()
-    array = []
 
-    with open('DatabaseJadwalTutor.csv', 'r') as file:
-        file_reader = csv.reader(file)
-        for line in file_reader:
-            array.append(line)
+    #ambil data jadwal
+    c.execute("SELECT rowid, * FROM JadwalTutor WHERE tutorID = (?)", (id,))
+    data = c.fetchall()
+    print(data)
+    #print(data)
 
     list.delete(0,list.size())
-    listschedule.clear()
-    for x in array :
-        text = ""
-        if(x[0] == id):
-            listschedule.append(x)
-            text = ("Mata Pelajaran : " + x[4] + " | " + x[2] + " Kelas " + x[3] + " | Hari : " + x[6] + " | " + "Jam Mulai : " + x[7] + ".00 WIB")
-            list.insert(tk.END,text)
-    # for y in listschedule:
-    #     print(y)
+    i = 1
+    for x in data :
+        c.execute("SELECT rowid, * FROM DetailCourse WHERE rowid = (?)", (x[2],))
+        data2 = c.fetchall()
+        print(data2)
+        text = (str(i) + ". Mata Pelajaran : " + data2[0][1] + " | " + data2[0][2] + " Kelas " + str(data2[0][3]) + " | Hari : " + x[3] + " | " + "Jam Mulai : " + str(x[4]) + ".00 WIB")
+        i = i + 1
+        list.insert(tk.END,text)
+        #print(text)
+    conn.commit()
+    conn.close()
 
 def deleteJadwal(list):
-    sel = list.curselection()
-    deleted = []
-    array = []
+    MsgBox = messagebox.askquestion("askquestion", "Are you sure?")
+    if (MsgBox == 'yes'):
+        conn = sqlite3.connect('Tutorin.db')
+        c = conn.cursor()
 
-    with open('DatabaseJadwalTutor.csv', 'r') as file:
-        file_reader = csv.reader(file)
-        for line in file_reader:
-            array.append(line)
-        row = list(file_reader)
-    
-    for x in sel:
-        for y in array :
-            if(listschedule[x] == y):
-                array.remove(y)
-        #         print(y)
-        # print(x)
+        id = textboxf1.get()
+        sel = list.curselection()
+        i = int(list.get(sel)[0]) - 1
+        #print(list.get(sel)[0])
+        #print(i)
 
-    # with open('DatabaseJadwalTutor.csv', 'r') as writeobj:
-    #     write = csv.writer(writeobj)
-    #     for x in array:
-    #         newrow=[x[0],x[1],x[2],x[3],x[4],x[5],x[6],x[7],x[8]] 
-    #         write.writerows(newrow)
-    #     #newrow = list(array)
-        
-    
-    for x in row:
-        print(x)
-        #deleted.append(listschedule[x])
-    # for y in deleted:
-    #     print(y)
-    # for y in listschedule:
-    #     print("ok")
+
+        #ambil data jadwal
+        c.execute("SELECT rowid, * FROM JadwalTutor")
+        data = c.fetchall()
+        #print(data)
+
+        c.execute("SELECT rowid, * FROM JadwalTutor WHERE tutorID = (?)", (id,))
+        data2 = c.fetchall()
+
+        row = int(getID2(data, data2[i]))
+        #print(row)
+        #hapus data dari database
+        c.execute("DELETE FROM JadwalTutor WHERE rowid = (?)",(row,))
+        #print('sukses')
+
+        #show messagebox
+        messagebox.showinfo("Info", "Berhasil Menghapus Data")
+
+        conn.commit()
+        conn.close()
 
 
 labelf1 = tk.Label(frame2, text="Jadwal Tutor", bg = '#80c1ff', font=50)
@@ -261,6 +299,7 @@ buttonf2.place(relx=0.75, rely=0.93)
 
 buttonf3 = tk.Button(frame2, text="Delete Selected Schedule", bd=2, command=lambda:deleteJadwal(mylist))
 buttonf3.place(relx=0.5, rely=0.93)
+
 
 
 
