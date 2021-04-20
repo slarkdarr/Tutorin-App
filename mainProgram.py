@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 from tkinter import messagebox
 import csv
 import sqlite3
@@ -7,6 +8,7 @@ import mysql.connector as mysql
 
 from jadwalTutor import * 
 from searchTutor import *
+from pemesanan import *
 
 
 HEIGHT = 670
@@ -48,6 +50,19 @@ frame5.place(relwidth=0.9, relheight=0.3, relx=0.05, rely=0.05)
 # lower search tutor
 frame6 = tk.Frame(main, bg = '#80c1ff', bd = 2)
 frame6.place(relwidth=0.9, relheight=0.6, relx=0.05, rely=0.35)
+
+# Kehadiran
+frame7 = tk.Frame(main, bg = '#80c1ff', bd = 2)
+frame7.place(relwidth=0.9, relheight=0.6, relx=0.05, rely=0.35)
+
+
+
+
+
+
+
+
+
 
 #==============frame1===================
 label1 = tk.Label(frame, text="Form Jadwal Tutor", bg = '#80c1ff', font=50)
@@ -188,14 +203,6 @@ button2.place(relx=0.25, rely=0.93)
 
 
 
-
-
-
-# buttonf3 = tk.Button(frame2, text="Delete Selected Schedule", bd=2)
-# buttonf3.place(relx=0.5, rely=0.93)
-
-
-
 # #==============frame5===================
 #judul
 label1 = tk.Label(frame5, text="Search Tutor", bg = '#80c1ff', font=40)
@@ -236,6 +243,9 @@ ting2.place(relx=0.5, rely=0.5)
 ting3 = tk.Radiobutton(frame5, text="Kelas 3", variable=varting, value=3)
 ting3.place(relx=0.7, rely=0.5)
 
+button2 = tk.Button(frame5, text="Back", bd=2, command=lambda:raise_frame(frame4))
+button2.place(relx=0.25, rely=0.8)
+
 
 #hari
 label5 = tk.Label(frame5, text='Hari ', font=40, bg = '#80c1ff')
@@ -270,12 +280,64 @@ button2.place(relx=0.75, rely=0.9)
 
 
 
+# #==============frame7===================
+
+labelf1 = tk.Label(frame7, text="Kehadiran", bg = '#80c1ff', font=50)
+labelf1.place(relx=0.4, rely=0.8)
+
+labelf2 = tk.Label(frame7, text='Course ID', font=40, bg = '#80c1ff')
+labelf2.place(relx=0.1, rely=0.4)
+
+textboxf1 = tk.Entry(frame7, font=25)
+textboxf1.place(relx=0.2, rely=0.4, relwidth=0.5)
+
+tv = ttk.Treeview(frame7, columns=(1, 2, 3, 4), show="headings", height="5")
+tv.pack()
+
+arrays = [['INV-001', 'Openlane', '05/10/2020', 'Attended'],
+          ['INV-002', 'Gogozoom', '05/10/2020', 'Attended'],
+          ['INV-003', 'Nam-zim', '05/10/2020', 'Missed']]
+
+tv.heading(1, text="Course ID")
+tv.heading(2, text="Tutor Name")
+tv.heading(3, text="Course Date")
+tv.heading(4, text="Status")
+
+for i in arrays:
+    tv.insert('', 'end', values=i)
+
+# fungsi antara
+def textboxf1F(): 
+    showSchedule(mylist, textboxf1.get())
+
+buttonf1 = tk.Button(frame7, text="Submit", bd=2, command=textboxf1F)
+buttonf1.place(relx=0.75, rely=0.4)
+button2 = tk.Button(frame7, text="Back", bd=2, command=lambda:raise_frame(frame4))
+button2.place(relx=0.25, rely=0.8)
+# print(textboxf1.get())
+
+
+
 # #==============frame4===================
+
+labelf1 = tk.Label(frame4, text="Tutorin Application", bg = '#80c1ff', font=50)
+labelf1.place(relx=0.4, rely=0)
+
 buttonf1 = tk.Button(frame4, text="Jadwal Tutor", bd=2, command=lambda:raise_frame(frame2))
 buttonf1.place(relx=0.75, rely=0.1)
 
 buttonf2 = tk.Button(frame4, text="Search Tutor", bd=2, command=lambda:raise_frame(frame5))
 buttonf2.place(relx=0.5, rely=0.1)
+
+# 
+def goto_pesanan() : 
+    Pemesanan.makeForm()
+
+buttonf3 = tk.Button(frame4, text="Pemesanan", bd=2, command=goto_pesanan)
+buttonf3.place(relx=0.25, rely=0.1)
+
+buttonf4 = tk.Button(frame4, text="Kehadiran", bd=2, command=lambda:raise_frame(frame7))
+buttonf4.place(relx=0, rely=0.1)
 
 raise_frame(frame4)
 main.mainloop()
