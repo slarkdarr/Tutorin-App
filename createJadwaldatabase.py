@@ -55,16 +55,19 @@ c = conn.cursor()
 
 #manampilkan isi deatilcourse
 # c.execute("SELECT rowid, * FROM DetailCourse")
-c.execute("SELECT rowid, * FROM DetailCourse WHERE namaMapel = (?) AND jenjang = (?) AND tingkat = (?)",('Biologi','SMA',1,))
-items = c.fetchall()
-for x in items:
-    print(x)
-
-#manampilkan isi jadwal
-# c.execute("SELECT * FROM JadwalTutor")
+# c.execute("SELECT rowid, * FROM DetailCourse WHERE namaMapel = (?) AND jenjang = (?)",('Sejarah','SMA',))
 # items = c.fetchall()
 # for x in items:
 #     print(x)
+
+# c.execute("DELETE FROM JadwalTutor WHERE jamMulai = 0")
+
+# #manampilkan isi jadwal
+# c.execute("SELECT * FROM JadwalTutor")
+c.execute("SELECT rowid, * FROM JadwalTutor WHERE tutorID = (?) AND hari = (?)",(12,'Senin',))
+items = c.fetchall()
+for x in items:
+    print(x)
 
 conn.commit()
 

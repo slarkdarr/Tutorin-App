@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 import csv
 import sqlite3
+from tkinter.ttk import Combobox
 
 
 def getIntJam(jam):
@@ -73,15 +74,15 @@ def saveForm():
     if(desc == ""):
         desc = "Tidak Ada"
     #id, nama, jenjang, tingkat, mapel, durasi, hari, jam, des
-    if(id=="" or nama=="" or jen=="" or ting==0 or durasi==0):
+    if(id=="" or nama=="" or jen=="" or ting==0 or durasi==0 or mapel =="" or hari=="" or jam==0):
         #show messagebox
-        messagebox.showerror("Error", "Gagal Meyimpan Data.\nCek Kembali Data Anda!")
+        messagebox.showerror("Error", "Data Tidak Lengkap.\nCek Kembali Data Anda!")
         #print("gagal")
     else:
         #dapetin IDcourse
         c.execute("SELECT rowid, * FROM DetailCourse")
         data = c.fetchall()
-        courseid = getID(data, mapel, str(ting), jen)
+        courseid = getID(data, mapel, ting, jen)
 
         #print(courseid)
         nrow = [id,courseid,hari,jam,durasi,desc]
@@ -166,7 +167,7 @@ label4.place(relx=0.1, rely=0.3)
 mapelAva = ('Biologi', 'Matematika', 'Fisika', 'Kimia', 'Ekonomi', 'Sosiologi', 'Geografi', 
             'Bahasa Inggris', 'Bahasa Indonesia', 'Sejarah')
 varmapel = tk.StringVar()
-mapelEntry = tk.Spinbox(frame, value=mapelAva, textvariable = varmapel)
+mapelEntry = Combobox(frame, value=mapelAva, textvariable = varmapel)
 mapelEntry.place(relx=0.3, rely=0.3, relwidth=0.6)
 
 #durasi
@@ -186,7 +187,7 @@ label4.place(relx=0.1, rely=0.4)
 
 hariAva = ('Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu')
 varhari = tk.StringVar()
-hariEntry = tk.Spinbox(frame, value=hariAva, textvariable = varhari)
+hariEntry = Combobox(frame, value=hariAva, textvariable = varhari)
 hariEntry.place(relx=0.3, rely=0.4, relwidth=0.6)
               
 
@@ -197,7 +198,7 @@ label4.place(relx=0.1, rely=0.45)
 varjam = tk.StringVar()
 jamAva = ('08.00 WIB', '09.00 WIB','10.00 WIB','11.00 WIB','12.00 WIB','13.00 WIB','14.00 WIB','15.00 WIB',
             '16.00 WIB','17.00 WIB','18.00 WIB','19.00 WIB','20.00 WIB')
-jamEntry = tk.Spinbox(frame, value=jamAva, textvariable = varjam)
+jamEntry = Combobox(frame, value=jamAva, textvariable = varjam)
 jamEntry.place(relx=0.3, rely=0.45, relwidth=0.6)
 
 #deskripsi
@@ -224,7 +225,7 @@ def showSchedule(list) :
     #ambil data jadwal
     c.execute("SELECT rowid, * FROM JadwalTutor WHERE tutorID = (?)", (id,))
     data = c.fetchall()
-    print(data)
+    #print(data)
     #print(data)
 
     list.delete(0,list.size())
@@ -232,7 +233,7 @@ def showSchedule(list) :
     for x in data :
         c.execute("SELECT rowid, * FROM DetailCourse WHERE rowid = (?)", (x[2],))
         data2 = c.fetchall()
-        print(data2)
+        #print(data2)
         text = (str(i) + ". Mata Pelajaran : " + data2[0][1] + " | " + data2[0][2] + " Kelas " + str(data2[0][3]) + " | Hari : " + x[3] + " | " + "Jam Mulai : " + str(x[4]) + ".00 WIB")
         i = i + 1
         list.insert(tk.END,text)
@@ -268,7 +269,8 @@ def deleteJadwal(list):
         #print('sukses')
 
         #show messagebox
-        messagebox.showinfo("Info", "Berhasil Menghapus Data")
+        messagebox.showinfo("Info", "Berhasil Menghapus Data. \nSilahkan Menekan Tombol 'Submit' \nUntuk Memperbaharui Tampilan Jadwal")
+        #mylist.delete(tk.ANCHOR)
 
         conn.commit()
         conn.close()

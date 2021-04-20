@@ -1,5 +1,81 @@
 import tkinter as tk
 import csv
+from tkinter.ttk import Combobox
+from tkinter import messagebox
+import sqlite3
+
+def searchTutor(list):
+   conn = sqlite3.connect('Tutorin.db')
+   c = conn.cursor()
+   list.delete(0,list.size())
+   jen = ""
+   if(int(varje.get()) == 1) :
+      jen = "SMP"
+   elif(int(varje.get()) == 2) :
+      jen = "SMA"
+   ting = varting.get() #default = 0
+   mapel = varmapel.get()
+   hari = str(varhari.get())
+   # print(hari)
+   # print(mapel)
+   # print(ting)
+   # print(jen)
+   if(mapel == "" or jen == ""):
+      messagebox.showerror("Error", "Data Tidak Lengkap.\nWajib Memasukkan Nilai Mata Pelajaran dan Jenjang!")
+      #print('gagal')
+   #untuk tingkat kosong
+   elif(ting == 0):
+      c.execute("SELECT rowid, * FROM DetailCourse WHERE namaMapel = (?) AND jenjang = (?)", (mapel,jen,))
+      dataMapel = c.fetchall()
+      #print(dataMapel)
+      #untuk tingkat dan hari kosong
+      if(hari == ""):
+         for x in dataMapel :
+            c.execute("SELECT rowid, * FROM JadwalTutor WHERE courseID = (?)", (x[0],))
+            dataJadwal = c.fetchall()
+            for y in dataJadwal:
+               #print(y)
+               text = ("ID Tutor : "+ str(y[1])+ " | Nama : "+" | Mata Pelajaran : " + x[1] + " | " + x[2] + " Kelas " + str(x[3]) + " | Hari : " + y[3] + " | " + "Jam Mulai : " + str(y[4]) + ".00 WIB" + " | Durasi : " + str(y[5]) + " Jam")
+               # print(text)
+               list.insert(tk.END,text)
+      #untuk tingkat kosong dan hari tidak kosong
+      else:
+         for x in dataMapel :
+            c.execute("SELECT rowid, * FROM JadwalTutor WHERE courseID = (?) AND hari = (?)", (x[0],hari,))
+            dataJadwal = c.fetchall()
+            for y in dataJadwal:
+               #print(y)
+               text = ("ID Tutor : "+ str(y[1])+ " | Nama : "+" | Mata Pelajaran : " + x[1] + " | " + x[2] + " Kelas " + str(x[3]) + " | Hari : " + y[3] + " | " + "Jam Mulai : " + str(y[4]) + ".00 WIB" + " | Durasi : " + str(y[5]) + " Jam")
+               #print(text)
+               list.insert(tk.END,text)
+   #untuk tingkat terisi
+   else :
+      c.execute("SELECT rowid, * FROM DetailCourse WHERE namaMapel = (?) AND jenjang = (?) AND tingkat = (?)", (mapel,jen,ting,))
+      dataMapel = c.fetchall()
+      #print(dataMapel)
+      #untuk tingkat terisi dan hari kosong
+      if(hari == ""):
+         for x in dataMapel :
+            c.execute("SELECT rowid, * FROM JadwalTutor WHERE courseID = (?)", (x[0],))
+            dataJadwal = c.fetchall()
+            for y in dataJadwal:
+               #print(y)
+               text = ("ID Tutor : "+ str(y[1])+ " | Nama : "+" | Mata Pelajaran : " + x[1] + " | " + x[2] + " Kelas " + str(x[3]) + " | Hari : " + y[3] + " | " + "Jam Mulai : " + str(y[4]) + ".00 WIB" + " | Durasi : " + str(y[5]) + " Jam")
+               # print(text)
+               list.insert(tk.END,text)
+      #untuk semua terisi
+      else:
+         for x in dataMapel :
+            c.execute("SELECT rowid, * FROM JadwalTutor WHERE courseID = (?) AND hari = (?)", (x[0],hari,))
+            dataJadwal = c.fetchall()
+            for y in dataJadwal:
+               #print(y)
+               text = ("ID Tutor : "+ str(y[1])+ " | Nama : "+" | Mata Pelajaran : " + x[1] + " | " + x[2] + " Kelas " + str(x[3]) + " | Hari : " + y[3] + " | " + "Jam Mulai : " + str(y[4]) + ".00 WIB" + " | Durasi : " + str(y[5]) + " Jam")
+               #print(text)
+               list.insert(tk.END,text)
+
+   conn.commit()
+   conn.close()
 
 HEIGHT = 670
 WIDTH = 800
@@ -28,7 +104,7 @@ label4.place(relx=0.1, rely=0.2)
 mapelAva = ('Biologi', 'Matematika', 'Fisika', 'Kimia', 'Ekonomi', 'Sosiologi', 'Geografi', 
             'Bahasa Inggris', 'Bahasa Indonesia', 'Sejarah')
 varmapel = tk.StringVar()
-mapelEntry = tk.Spinbox(frame, value=mapelAva, textvariable = varmapel)
+mapelEntry = Combobox(frame, value=mapelAva, textvariable = varmapel)
 mapelEntry.place(relx=0.3, rely=0.2, relwidth=0.6)
 
 #jenjang pendidikan mapel
@@ -63,28 +139,20 @@ label5.place(relx=0.1, rely=0.65)
 
 hariAva = ('Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu')
 varhari = tk.StringVar()
-hariEntry = tk.Spinbox(frame, value=hariAva, textvariable = varhari)
+hariEntry = Combobox(frame, value=hariAva, textvariable = varhari)
 hariEntry.place(relx=0.3, rely=0.65, relwidth=0.6)
 
 
-button = tk.Button(frame, text="Search", bd=2)
-button.place(relx=0.75, rely=0.8)
-
 #lower
-# label7 = tk.Label(lower_frame)
-# label7.place(relx=0.05, rely=0, relwidth=0.9, relheight=0.9)
-
 scrollbar = tk.Scrollbar(lower_frame, orient=tk.VERTICAL)
 scrollbar.place(relx=0.05, rely=0, relwidth=0.9, relheight=0.9)
 
 mylist = tk.Listbox(lower_frame, yscrollcommand = scrollbar.set )
-for line in range(100):
-   mylist.insert(tk.END,"This is line number " + str(line))
-
 mylist.place(relx=0.05, rely=0, relwidth=0.9, relheight=0.9)
+
 scrollbar.config( command = mylist.yview )
 
-def searchTutor():
-   x=0
+button = tk.Button(frame, text="Search", bd=2, command=lambda:searchTutor(mylist))
+button.place(relx=0.75, rely=0.8)
 
 search.mainloop()
