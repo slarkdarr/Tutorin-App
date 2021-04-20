@@ -5,11 +5,13 @@ class PemesananDB:
 		self.conn = mysql.connector.connect(user='root', password='Gaussian021001', host='127.0.0.1', database='Pemesanan')
 		self.cursor = self.conn.cursor()
 
+	# Insert data in the form to database
 	def insertToDatabase(self, orderID, muridID, tutorID, courseID, waktuMengajar, nominal, statusPembayaran):
 		self.dbPemesanan = """
 		INSERT INTO Test
 		VALUES(%s, %s, %s, %s, %s, %s, %s)
 		"""
+
 		self.dataPemesanan = (orderID, muridID, tutorID, courseID, waktuMengajar, nominal, statusPembayaran)
 
 		try:
@@ -17,9 +19,14 @@ class PemesananDB:
 			self.cursor.execute(self.dbPemesanan, self.dataPemesanan)
 			# Commit ke database
 			self.conn.commit()
-		except:
+		except mysql.connector.errors.IntegrityError:
+			print("Data can't be duplicate")
 			# Rollback kalau ada error
 			self.conn.rollback()
+		finally:
+			print("Data has been added to database")
 
+	# Close the database
 	def closeDatabase(self):
 		self.conn.close()
+		print("MySQL is closed")
