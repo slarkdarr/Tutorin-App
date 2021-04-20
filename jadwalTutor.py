@@ -3,7 +3,7 @@ from tkinter import messagebox
 import csv
 import sqlite3
 from tkinter.ttk import Combobox
-
+import mysql.connector as mysql 
 
 def getIntJam(jam):
     value = 0
@@ -55,10 +55,13 @@ def message(title, text):
    tk.MessageBox.showinfo(title, text)
 
 def saveForm():
-    conn = sqlite3.connect('Tutorin.db')
+    # conn = sqlite3.connect('Tutorin.db')
+    # c = conn.cursor()
+    
+    conn = mysql.connect(host="localhost", user="root", password="", database="tutorin")
     c = conn.cursor()
 
-    id = textbox1.get()
+    id = int(textbox1.get())
     nama = textbox3.get()
     jen = ""
     if(int(varje.get()) == 1) :
@@ -80,14 +83,18 @@ def saveForm():
         #print("gagal")
     else:
         #dapetin IDcourse
-        c.execute("SELECT rowid, * FROM DetailCourse")
+        c.execute("SELECT * FROM detailcourse")
         data = c.fetchall()
         courseid = getID(data, mapel, ting, jen)
 
         #print(courseid)
         nrow = [id,courseid,hari,jam,durasi,desc]
+        print(nrow)
         #insert data to database
-        c.execute("INSERT INTO JadwalTutor VALUES (?,?,?,?,?,?)", nrow)
+        # c.execute("INSERT INTO JadwalTutor VALUES (id,courseid,'"+courseid+"'")")
+        # print("(",id,",",courseid,",'" +hari +"',",jam,",",durasi,",'"+ desc +"')")
+        c.execute("insert into jadwaltutor(tutorid, courseid, hari, jamMulai, durasi, deskripsi) values(",id,",",courseid,",'"+hari+"',",jam,",",durasi,",'"+desc+"')")
+        
         #show messagebox
         messagebox.showinfo("Info", "Berhasil Menyimpan Data")
         #print("sukses")
