@@ -79,6 +79,9 @@ def searchTutor(list):
    conn.commit()
    conn.close()
 
+def konfirmasiPemesanan():
+   MsgBox = messagebox.askquestion("askquestion", "Apakah Ada Yakin Ingin Melakukan Pemesanan?")
+
 HEIGHT = 670
 WIDTH = 800
 
@@ -106,7 +109,7 @@ label4.place(relx=0.1, rely=0.2)
 mapelAva = ('Biologi', 'Matematika', 'Fisika', 'Kimia', 'Ekonomi', 'Sosiologi', 'Geografi', 
             'Bahasa Inggris', 'Bahasa Indonesia', 'Sejarah')
 varmapel = tk.StringVar()
-mapelEntry = Combobox(frame, value=mapelAva, textvariable = varmapel)
+mapelEntry = Combobox(frame, value=mapelAva, textvariable = varmapel, state="readonly")
 mapelEntry.place(relx=0.3, rely=0.2, relwidth=0.6)
 
 #jenjang pendidikan mapel
@@ -141,20 +144,23 @@ label5.place(relx=0.1, rely=0.65)
 
 hariAva = ('Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu')
 varhari = tk.StringVar()
-hariEntry = Combobox(frame, value=hariAva, textvariable = varhari)
+hariEntry = Combobox(frame, value=hariAva, textvariable = varhari, state="readonly")
 hariEntry.place(relx=0.3, rely=0.65, relwidth=0.6)
 
 
 #lower
 scrollbar = tk.Scrollbar(lower_frame, orient=tk.VERTICAL)
-scrollbar.place(relx=0.05, rely=0, relwidth=0.9, relheight=0.9)
+scrollbar.place(relx=0.05, rely=0, relwidth=0.9, relheight=0.85)
 
 mylist = tk.Listbox(lower_frame, yscrollcommand = scrollbar.set )
-mylist.place(relx=0.05, rely=0, relwidth=0.9, relheight=0.9)
+mylist.place(relx=0.05, rely=0, relwidth=0.9, relheight=0.85)
 
 scrollbar.config( command = mylist.yview )
 
 button = tk.Button(frame, text="Search", bd=2, command=lambda:searchTutor(mylist))
 button.place(relx=0.75, rely=0.8)
+
+button2 = tk.Button(lower_frame, text="Pesan Tutor", bd=2, command=konfirmasiPemesanan)
+button2.place(relx=0.75, rely=0.9)
 
 search.mainloop()

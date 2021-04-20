@@ -174,7 +174,7 @@ label4.place(relx=0.1, rely=0.3)
 mapelAva = ('Biologi', 'Matematika', 'Fisika', 'Kimia', 'Ekonomi', 'Sosiologi', 'Geografi', 
             'Bahasa Inggris', 'Bahasa Indonesia', 'Sejarah')
 varmapel = tk.StringVar()
-mapelEntry = Combobox(frame, value=mapelAva, textvariable = varmapel)
+mapelEntry = Combobox(frame, value=mapelAva, textvariable = varmapel,state="readonly")
 mapelEntry.place(relx=0.3, rely=0.3, relwidth=0.6)
 
 #durasi
@@ -192,9 +192,9 @@ dur2.place(relx=0.5, rely=0.35)
 label4 = tk.Label(frame, text='Hari ', font=40, bg = '#80c1ff')
 label4.place(relx=0.1, rely=0.4)
 
-hariAva = ('Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu')
+hariAva = ('Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu',)
 varhari = tk.StringVar()
-hariEntry = Combobox(frame, value=hariAva, textvariable = varhari)
+hariEntry = Combobox(frame, value=hariAva, textvariable = varhari,state="readonly")
 hariEntry.place(relx=0.3, rely=0.4, relwidth=0.6)
               
 
@@ -205,7 +205,7 @@ label4.place(relx=0.1, rely=0.45)
 varjam = tk.StringVar()
 jamAva = ('08.00 WIB', '09.00 WIB','10.00 WIB','11.00 WIB','12.00 WIB','13.00 WIB','14.00 WIB','15.00 WIB',
             '16.00 WIB','17.00 WIB','18.00 WIB','19.00 WIB','20.00 WIB')
-jamEntry = Combobox(frame, value=jamAva, textvariable = varjam)
+jamEntry = Combobox(frame, value=jamAva, textvariable = varjam, state="readonly")
 jamEntry.place(relx=0.3, rely=0.45, relwidth=0.6)
 
 #deskripsi
