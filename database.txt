@@ -1,16 +1,18 @@
-CREATE TABLE Pemesanan (
-	OrderID int,
-	MuridID int,
-	TutorID int,
-	CourseID int,
-	WaktuMengajar datetime,
-	Nominal int,
-	StatusPembayaran number(1),
-	primary key (OrderID, MuridID, TutorID, CourseID),
-	constraint FK_muridID
-		foreign key (MuridID) references murid(MuridID)
-		on update cascade on delete cascade,
-	constraint FK_tutorID
-		foreign key (TutorID) references tutor(TutorID)
-		on update cascade on delete cascade
-	);
+CREATE TABLE IF NOT EXISTS Pemesanan (
+	OrderID int not null,
+	MuridID int not null,
+	TutorID int not null,
+	CourseID int not null,
+	WaktuMengajar datetime not null,
+	Nominal int not null,
+	StatusPembayaran number(1) not null,
+	primary key (OrderID)
+);
+
+# Buat digabungin sama database utama
+constraint FK_muridID
+	foreign key (MuridID) references murid(MuridID)
+	on update cascade on delete cascade,
+constraint FK_tutorID
+	foreign key (TutorID) references tutor(TutorID)
+	on update cascade on delete cascade
