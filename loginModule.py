@@ -39,16 +39,39 @@ class Login:
         self.submit = Button(self.loginWindow, text='Submit', pady=5, padx=20, command=self.validate)
         self.submit.place(x=100, y=150)
 
+    def checkDatabase(self, username, password):
+        con = mysql.connect(host="localhost", user="root", password="root", database="tutorin")
+        cursor = con.cursor()
+
+        cursor.execute("SELECT * FROM user WHERE username ='"+username+"'").fetchall()
+        row = cursor.fetchall()
+        print(row)
+        if row[0][1] == username:
+            return row[0][2] == password
+
+
+
+
     def validate(self):
-        data = (self.usernameE.get(),)
-        inputData = (self.usernameE.get(), self.passwordE.get(),)
-        try:
-            if (db.validateData(data, inputData)):
-                messagebox.showinfo('Successful', 'Login was sucessful')
-            else:
-                messagebox.showerror('Error', 'Wrong Credentials')
-        except IndexError:
+
+        username = self.usernameE.get()
+        password = self.passwordE.get()
+
+        if (self.checkDatabase(username, password)):
+            messagebox.showinfo('Successful', 'Login was sucessful')
+        else :
             messagebox.showerror('Error', 'Wrong Credentials')
+        # data = (self.usernameE.get(),)
+        # inputData = (self.usernameE.get(), self.passwordE.get(),)
+        # try:
+        #     if (db.validateData(data, inputData)):
+        #         messagebox.showinfo('Successful', 'Login was sucessful')
+        #     else:
+        #         messagebox.showerror('Error', 'Wrong Credentials')
+        # except IndexError:
+        #     messagebox.showerror('Error', 'Wrong Credentials')
+
+
     def run(self):
         self.loginWindow.mainloop()
 
@@ -155,7 +178,7 @@ class Register:
 
     def add(self):
 
-        con = mysql.connect(host="localhost", user="root", password="", database="tutorin")
+        con = mysql.connect(host="localhost", user="root", password="root", database="tutorin")
         cursor = con.cursor()
 
         id = 1;
