@@ -43,7 +43,7 @@ class Login:
         con = mysql.connect(host="localhost", user="root", password="root", database="tutorin")
         cursor = con.cursor()
 
-        cursor.execute("SELECT * FROM user WHERE username ='"+username+"'").fetchall()
+        cursor.execute("SELECT * FROM user WHERE username ='"+username+"'")
         row = cursor.fetchall()
         print(row)
         if row[0][1] == username:
