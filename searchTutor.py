@@ -73,7 +73,9 @@ def searchTutor(list):
                text = ("ID Tutor : "+ str(y[1])+ " | Nama : "+" | Mata Pelajaran : " + x[1] + " | " + x[2] + " Kelas " + str(x[3]) + " | Hari : " + y[3] + " | " + "Jam Mulai : " + str(y[4]) + ".00 WIB" + " | Durasi : " + str(y[5]) + " Jam")
                #print(text)
                list.insert(tk.END,text)
-
+   #print(list.size())
+   if(list.size() == 0) :
+      list.insert(tk.END,"0 Results Found")
    conn.commit()
    conn.close()
 
