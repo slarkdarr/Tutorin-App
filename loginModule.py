@@ -133,17 +133,17 @@ class RegisterTutor:
         # self.jenjangPend.place(x=70, y=440)
         self.jenjangPend.pack(side=TOP, padx=70)
 
-        self.fareS = IntVar()
+        self.fareS = StringVar()
         self.ktpS = StringVar()
         self.expS = StringVar()
         self.headlineS = StringVar()
 
-        # self.fareL = Label(self.registerWindow, text="Fare", font=(10))
-        # # self.fareL.place(x=70, y=490)
-        # self.fareL.pack(side=TOP, padx=70)
-        # self.fareE = Entry(self.registerWindow, relief=FLAT, textvariable=self.fareS)
-        # # self.fareE.place(x=70, y=510) 
-        # self.fareE.pack(side=TOP, padx=70) 
+        self.fareL = Label(self.registerWindow, text="Fare", font=(10))
+        # self.fareL.place(x=70, y=490)
+        self.fareL.pack(side=TOP, padx=70)
+        self.fareE = Entry(self.registerWindow, relief=FLAT, textvariable=self.fareS)
+        # self.fareE.place(x=70, y=510) 
+        self.fareE.pack(side=TOP, padx=70) 
 
         self.ktpL = Label(self.registerWindow, text="KTP", font=(10))
         # self.ktpL.place(x=70, y=560)
@@ -212,6 +212,7 @@ class RegisterTutor:
         rating = 0
         jenjPend = self.jenjangPend.get()
         ktp = self.ktpE.get()
+        tarif = self.fareE.get()
         xp = self.expE.get()
         ed = self.Pend.get()
         hl = self.headlineE.get()
@@ -221,7 +222,7 @@ class RegisterTutor:
         if (self.searchData(username)):
             cursor.execute("insert into user(username, password, nama, kontak, alamat) values('"+ username +"','" + password +"','" + name +"','" + contact +"','" + address +"')")
             cursor.execute('commit')
-            cursor.execute("insert into tutor(username, jenjang, noKTP, pengalaman, pendidikan, headline) values('"+ username +"','" + jenjPend +"','" + ktp +"','" + xp +"','" + ed +"','"+ hl +"')")
+            cursor.execute("insert into tutor(username, jenjang, tarif, noKTP, pengalaman, pendidikan, headline) values('"+ username +"','" + jenjPend +"',"+tarif+",'" + ktp +"','" + xp +"','" + ed +"','"+ hl +"')")
             cursor.execute('commit')
             messagebox.showinfo('Successful', 'Username was added')
         else :
@@ -243,19 +244,6 @@ class RegisterMurid:
         self.label.place(x=110, y=40)
         self.label.pack(side=TOP, padx=70, pady= 10)
         # Tkinter Stuff
-        # dropdown select account type
-        # self.clicked = StringVar()
-        # self.categ = Combobox(self.registerWindow, state="readonly", width = 5, textvariable=self.clicked)
-        # self.categ['values'] = ("Tutor", "Murid")
-        # # self.categ.place(relx=0.1, rely=4)
-        # self.categ.current(1)
-        # self.categ.place(x=110, y=60)
-        # self.categ.pack(side=TOP, pady=20)
-
-        # if (self.categ.get() == "Tutor"):
-        #     self.categ.bind("<<ComboboxSelected>>", self.comboClick)
-        # else :
-        #     self.categ.bind("<<ComboboxSelected>>", self.comboHide)
 
         self.usernameS = StringVar()
         self.passwordS = StringVar()
