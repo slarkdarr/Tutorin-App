@@ -112,11 +112,9 @@ class Pemesanan(tk.Frame):
 		self.pemesananDB.insertToDatabase(self.orderID, self.muridID, self.tutorID, self.courseID, self.waktuMengajar, self.nominal, self.statusPembayaran)
 		self.pemesananDB.closeDatabase()
 
-# Main Function (To make the form and its GUI)
-def makeForm():
-	window = tk.Tk()
-	app = Pemesanan(master=window)
-	app.modifyStatusPembayaran(True)
-	app.mainloop()
-
-makeForm()
+	# Main Function (To make the form and its GUI)
+	def makeForm():
+		window = tk.Tk()
+		app = Pemesanan(master=window)
+		app.modifyStatusPembayaran(True)
+		app.mainloop()
