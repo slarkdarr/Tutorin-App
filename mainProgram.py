@@ -53,7 +53,7 @@ frame6.place(relwidth=0.9, relheight=0.6, relx=0.05, rely=0.35)
 
 # Kehadiran
 frame7 = tk.Frame(main, bg = '#80c1ff', bd = 2)
-frame7.place(relwidth=0.9, relheight=0.6, relx=0.05, rely=0.35)
+frame7.place(relwidth=0.9, relheight=0.9, relx=0.05, rely=0.05)
 
 
 
@@ -243,8 +243,6 @@ ting2.place(relx=0.5, rely=0.5)
 ting3 = tk.Radiobutton(frame5, text="Kelas 3", variable=varting, value=3)
 ting3.place(relx=0.7, rely=0.5)
 
-button2 = tk.Button(frame5, text="Back", bd=2, command=lambda:raise_frame(frame4))
-button2.place(relx=0.25, rely=0.8)
 
 
 #hari
@@ -278,21 +276,23 @@ def konfirmasiPemesanan():
 button2 = tk.Button(frame6, text="Pesan Tutor", bd=2, command=konfirmasiPemesanan)
 button2.place(relx=0.75, rely=0.9)
 
-
+button2 = tk.Button(frame6, text="Back", bd=2, command=lambda:raise_frame(frame4))
+button2.place(relx=0.5, rely=0.9)
 
 # #==============frame7===================
 
 labelf1 = tk.Label(frame7, text="Kehadiran", bg = '#80c1ff', font=50)
-labelf1.place(relx=0.4, rely=0.8)
+labelf1.place(relx=0.45, rely=0.1)
 
 labelf2 = tk.Label(frame7, text='Course ID', font=40, bg = '#80c1ff')
-labelf2.place(relx=0.1, rely=0.4)
+labelf2.place(relx=0.1, rely=0.2)
 
 textboxf1 = tk.Entry(frame7, font=25)
-textboxf1.place(relx=0.2, rely=0.4, relwidth=0.5)
+textboxf1.place(relx=0.23, rely=0.2, relwidth=0.5)
 
 tv = ttk.Treeview(frame7, columns=(1, 2, 3, 4), show="headings", height="5")
-tv.pack()
+tv.place(relx=0, rely=0.4, relwidth=1, relheight=0.45)
+#tv.pack()
 
 arrays = [['INV-001', 'Openlane', '05/10/2020', 'Attended'],
           ['INV-002', 'Gogozoom', '05/10/2020', 'Attended'],
@@ -311,9 +311,9 @@ def textboxf1F():
     showSchedule(mylist, textboxf1.get())
 
 buttonf1 = tk.Button(frame7, text="Submit", bd=2, command=textboxf1F)
-buttonf1.place(relx=0.75, rely=0.4)
+buttonf1.place(relx=0.8, rely=0.2)
 button2 = tk.Button(frame7, text="Back", bd=2, command=lambda:raise_frame(frame4))
-button2.place(relx=0.25, rely=0.8)
+button2.place(relx=0.8, rely=0.9)
 # print(textboxf1.get())
 
 
@@ -324,9 +324,9 @@ labelf1 = tk.Label(frame4, text="Tutorin Application", bg = '#80c1ff', font=50)
 labelf1.place(relx=0.4, rely=0)
 
 buttonf1 = tk.Button(frame4, text="Jadwal Tutor", bd=2, command=lambda:raise_frame(frame2))
-buttonf1.place(relx=0.75, rely=0.1)
+buttonf1.place(relx=0.65, rely=0.1)
 
-buttonf2 = tk.Button(frame4, text="Search Tutor", bd=2, command=lambda:raise_frame(frame5))
+buttonf2 = tk.Button(frame4, text="Search Tutor", bd=2, command=lambda:[raise_frame(frame5),raise_frame(frame6)])
 buttonf2.place(relx=0.5, rely=0.1)
 
 # 
@@ -334,10 +334,10 @@ def goto_pesanan() :
     Pemesanan.makeForm()
 
 buttonf3 = tk.Button(frame4, text="Pemesanan", bd=2, command=goto_pesanan)
-buttonf3.place(relx=0.25, rely=0.1)
+buttonf3.place(relx=0.35, rely=0.1)
 
 buttonf4 = tk.Button(frame4, text="Kehadiran", bd=2, command=lambda:raise_frame(frame7))
-buttonf4.place(relx=0, rely=0.1)
+buttonf4.place(relx=0.2, rely=0.1)
 
 raise_frame(frame4)
 main.mainloop()
