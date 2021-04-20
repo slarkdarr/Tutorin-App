@@ -24,8 +24,8 @@ def login():
 def register():
     registerTk = Register()
     registerTk.run()
-    app = MainWindow()
-    app.run()
+    # app = MainWindow()
+    # app.run()
 
 app = MainWindow()
 app.run()

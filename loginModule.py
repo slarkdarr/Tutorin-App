@@ -50,27 +50,19 @@ class Login:
             return row[0][2] == password
 
 
-
-
     def validate(self):
 
         username = self.usernameE.get()
         password = self.passwordE.get()
 
-        if (self.checkDatabase(username, password)):
-            messagebox.showinfo('Successful', 'Login was sucessful')
-        else :
+        try :
+            if (self.checkDatabase(username, password)):
+                messagebox.showinfo('Successful', 'Login was sucessful')
+            else :
+                messagebox.showerror('Error', 'Wrong Credentials')
+        except :
             messagebox.showerror('Error', 'Wrong Credentials')
-        # data = (self.usernameE.get(),)
-        # inputData = (self.usernameE.get(), self.passwordE.get(),)
-        # try:
-        #     if (db.validateData(data, inputData)):
-        #         messagebox.showinfo('Successful', 'Login was sucessful')
-        #     else:
-        #         messagebox.showerror('Error', 'Wrong Credentials')
-        # except IndexError:
-        #     messagebox.showerror('Error', 'Wrong Credentials')
-
+        
 
     def run(self):
         self.loginWindow.mainloop()
@@ -108,11 +100,13 @@ class Register:
         self.categ = Combobox(self.registerWindow, state="readonly", width = 5, textvariable=self.clicked)
         self.categ['values'] = ("Tutor", "Murid")
         # self.categ.grid(column=2, row=4)
-        self.categ.current(0)
+        self.categ.current(1)
         
         self.categ.place(x=110, y=60)
-        # if (self.categ.get() == "Tutor"):
-        #     self.categ.bind("", comboClick)
+        if (self.categ.get() == "Tutor"):
+            self.categ.bind("<<ComboboxSelected>>", self.comboClick)
+        else :
+            self.categ.bind("<<ComboboxSelected1>>", self.comboHide)
 
         self.usernameS = StringVar()
         self.passwordS = StringVar()
@@ -145,8 +139,8 @@ class Register:
         self.addressE = Entry(self.registerWindow, relief=FLAT)
         self.addressE.place(x=70, y=390)
 
-        self.addressL = Label(self.registerWindow, text="Jenjang Pendidikan", font=(10))
-        self.addressL.place(x=70, y=420)
+        self.jenjangPendL = Label(self.registerWindow, text="Jenjang Pendidikan", font=(10))
+        self.jenjangPendL.place(x=70, y=420)
         self.jenjangPendClicked = StringVar()
         self.jenjangPend = Combobox(self.registerWindow, state="readonly", width = 5, textvariable=self.jenjangPendClicked)
         self.jenjangPend['values'] = ("SD", "SMP", "SMA")
@@ -155,26 +149,55 @@ class Register:
         self.jenjangPend.place(x=70, y=440)
         
         self.submit = Button(self.registerWindow, text='Submit', pady=5, padx=20, command=self.add)
-        self.submit.place(x=110, y=430)
+        self.submit.place(x=110, y=630)
             
-        # Actual Variables
-        # self.username = self.usernameS.get()
-        # print('ini username '+self.username)
-        # self.password = self.passwordS.get()
-        # print('ini password '+self.password)
-        # self.name = self.nameS.get()
-        # print('ini nama '+self.name)
-        # self.contact = self.contactS.get()
-        # print('ini contact '+self.contact)
-        # self.address = self.addressS.get()
-        # print('ini address '+self.address)
- 
-        # self.salt = bcrypt.gensalt()
-        # self.hashed = bcrypt.hashpw(self.password.encode(), self.salt)
+    def comboClick(self, event):
+        self.fareS = StringVar()
+        self.ktpS = StringVar()
 
+        self.fareL = Label(self.registerWindow, text="Fare", font=(10))
+        self.fareL.place(x=70, y=490)
+        self.fareE = Entry(self.registerWindow, relief=FLAT, textvariable=self.fareS)
+        self.fareE.place(x=70, y=510)  
+
+        self.ktpL = Label(self.registerWindow, text="KTP", font=(10))
+        self.ktpL.place(x=70, y=560)
+        self.ktpE = Entry(self.registerWindow, relief=FLAT, textvariable=self.ktpS)
+        self.ktpE.place(x=70, y=580) 
+    
+    def comboHide(self, event):
+        self.fareS = StringVar()
+        self.ktpS = StringVar()
+
+        self.fareL = Label(self.registerWindow, text="Fare", font=(10))
+        self.fareL.place(x=70, y=490)
+        self.fareE = Entry(self.registerWindow, relief=FLAT, textvariable=self.fareS)
+        self.fareE.place(x=70, y=510)  
+
+        self.ktpL = Label(self.registerWindow, text="KTP", font=(10))
+        self.ktpL.place(x=70, y=560)
+        self.ktpE = Entry(self.registerWindow, relief=FLAT, textvariable=self.ktpS)
+        self.ktpE.place(x=70, y=580) 
+
+        self.fareL.destroy()
+        self.fareE.destroy()
+        self.ktpL.destroy()
+        self.ktpE.destroy()
+        
         
     def run(self):
         self.registerWindow.mainloop()
+    
+    def searchData(self, username):
+        con = mysql.connect(host="localhost", user="root", password="root", database="tutorin")
+        cursor = con.cursor()
+
+        cursor.execute("SELECT * FROM user WHERE username ='"+username+"'")
+        row = cursor.fetchall()
+        print(row)
+        if row == []:
+            return 1
+        return 0
 
     def add(self):
 
@@ -193,9 +216,13 @@ class Register:
         # jenjang =  self.jenjangPend.get()
         # cursor.execute("insert into user values(2,'abc','djdjd','jdjdjd','ddjjdjd','ddjjdjd', 0, 0, 0)")
         # print("('"+ username +"','" + password +"','" + name +"','" + contact +"','" + address, balance, flag, rating +"')")
-        cursor.execute("insert into user(username, password, nama, kontak, alamat) values('"+ username +"','" + password +"','" + name +"','" + contact +"','" + address +"')")
-        cursor.execute('commit')
-        messagebox.showinfo('Successful', 'Username was added')
+        if (self.searchData(username)):
+            cursor.execute("insert into user(username, password, nama, kontak, alamat) values('"+ username +"','" + password +"','" + name +"','" + contact +"','" + address +"')")
+            cursor.execute('commit')
+            messagebox.showinfo('Successful', 'Username was added')
+        else :
+            messagebox.showwarning("Warning", 'Username already exists')
+
         con.close()
 
         # data = (self.username,)
