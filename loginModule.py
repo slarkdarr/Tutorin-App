@@ -1,12 +1,8 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter.ttk import Combobox
-import bcrypt
-from database import Database
 import mysql.connector as mysql
 
-db = Database()
-db.createTable()
 
 class Login:
     '''
@@ -14,7 +10,7 @@ class Login:
     @param username
     @param password
     '''
-    def __init__(self):
+    def __init__(self, usernameS, passwordS):
         '''
         Class Init Method for GUI
         :params — loginWindow, label, username
