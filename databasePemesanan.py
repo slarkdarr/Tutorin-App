@@ -2,7 +2,7 @@ import mysql.connector
 
 class PemesananDB:
 	def __init__(self):
-		self.conn = mysql.connector.connect(user='root', password='Gaussian021001', host='127.0.0.1', database='Pemesanan')
+		self.conn = mysql.connector.connect(user='root', password='password', host='127.0.0.1', database='Pemesanan')
 		self.cursor = self.conn.cursor()
 
 	# Insert data in the form to database
