@@ -51,12 +51,12 @@ class Login:
         username = self.usernameE.get()
         password = self.passwordE.get()
 
-        try :
+        try:
             if (self.checkDatabase(username, password)):
                 messagebox.showinfo('Successful', 'Login was sucessful')
-            else :
+            else:
                 messagebox.showerror('Error', 'Wrong Credentials')
-        except :
+        except:
             messagebox.showerror('Error', 'Wrong Credentials')
         
 
