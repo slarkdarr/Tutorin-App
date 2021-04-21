@@ -83,10 +83,10 @@ def makeForm():
 	app.mainloop()
 
 def testingPemesanan(order):
-	return int(order == True)
+	return order == True
 
 def insertPemesanan(orderID, muridID, tutorID, tutorName, mataPelajaran, jenjang, tingkat, hari):
 	# Prevent data duplication
-	return int(orderID != 12345678)
+	return orderID != 12345678
 
 # makeForm()

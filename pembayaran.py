@@ -120,10 +120,10 @@ def makeForm():
 
 def testingPembayaran(confirmation):
 	# Konfirmasi pembayaran
-	return int(confirmation == True)
+	return confirmation == True
 
 def insertFormPembayaran(orderID, muridID, tutorID, courseID, waktuMengajar, Nominal, statusPembayaran):
 	# Prevent data duplication
-	return int(orderID != 12345678)
+	return orderID != 12345678
 
 # makeForm()
