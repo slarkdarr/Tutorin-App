@@ -16,8 +16,8 @@ assert(getID(data,'Matematika',2,'SMA')==8)
 assert(getID(data,'Fisika',2,'SMP')==17)
 
 #test getID2
-data2 = [(16, 'Fisika', 'SMP', 1)]
-data3 = [(7, 'Matematika', 'SMA', 1)]
+data2 = (16, 'Fisika', 'SMP', 1)
+data3 = (7, 'Matematika', 'SMA', 1)
 assert(getID2(data,data2)==16)
 assert(getID2(data,data3)==7)
 
