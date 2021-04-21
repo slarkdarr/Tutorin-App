@@ -56,14 +56,7 @@ def main_run() :
 
     # Kehadiran
     frame7 = tk.Frame(main, bg = '#80c1ff', bd = 2)
-    frame7.place(relwidth=0.9, relheight=0.6, relx=0.05, rely=0.35)
-
-    # Home
-    frame8 = tk.Frame(main, bg = '#80c1ff', bd = 2)
-    frame8.place(relwidth=0.9, relheight=0.6, relx=0.05, rely=0.35)
-
-
-
+    frame7.place(relwidth=0.9, relheight=0.9, relx=0.05, rely=0.05)
 
     #==============frame1===================
     label1 = tk.Label(frame, text="Form Jadwal Tutor", bg = '#80c1ff', font=50)
@@ -73,39 +66,39 @@ def main_run() :
     label2 = tk.Label(frame, text='ID', font=40, bg = '#80c1ff')
     label2.place(relx=0.1, rely=0.1)
 
-    textbox1 = tk.Entry(frame, font=40)
-    textbox1.place(relx=0.3, rely=0.1, relwidth=0.6)
+    textbox1s = tk.Entry(frame, font=40)
+    textbox1s.place(relx=0.3, rely=0.1, relwidth=0.6)
 
     #nama
     label3 = tk.Label(frame, text='Nama', font=40, bg = '#80c1ff')
     label3.place(relx=0.1, rely=0.15)
 
-    textbox3 = tk.Entry(frame, font=40)
-    textbox3.place(relx=0.3, rely=0.15, relwidth=0.6)
+    textbox3s = tk.Entry(frame, font=40)
+    textbox3s.place(relx=0.3, rely=0.15, relwidth=0.6)
 
     #jenjang pendidikan mapel
     label4 = tk.Label(frame, text='Jenjang ', font=40, bg = '#80c1ff')
     label4.place(relx=0.1, rely=0.20)
 
-    varje = tk.IntVar()
-    jeng1 = tk.Radiobutton(frame, text="SMP", variable=varje, value=1)
+    varje2 = tk.IntVar()
+    jeng1 = tk.Radiobutton(frame, text="SMP", variable=varje2, value=1)
     jeng1.place(relx=0.3, rely=0.2)
 
-    jeng2 = tk.Radiobutton(frame, text="SMA", variable=varje, value=2)
+    jeng2 = tk.Radiobutton(frame, text="SMA", variable=varje2, value=2)
     jeng2.place(relx=0.5, rely=0.2)
 
     #tingkat
     label4 = tk.Label(frame, text='Tingkat', font=40, bg = '#80c1ff')
     label4.place(relx=0.1, rely=0.25)
 
-    varting = tk.IntVar()
-    ting1 = tk.Radiobutton(frame, text="Kelas 1", variable=varting, value=1)
+    varting2 = tk.IntVar()
+    ting1 = tk.Radiobutton(frame, text="Kelas 1", variable=varting2, value=1)
     ting1.place(relx=0.3, rely=0.25)
 
-    ting2 = tk.Radiobutton(frame, text="Kelas 2", variable=varting, value=2)
+    ting2 = tk.Radiobutton(frame, text="Kelas 2", variable=varting2, value=2)
     ting2.place(relx=0.5, rely=0.25)
 
-    ting3 = tk.Radiobutton(frame, text="Kelas 3", variable=varting, value=3)
+    ting3 = tk.Radiobutton(frame, text="Kelas 3", variable=varting2, value=3)
     ting3.place(relx=0.7, rely=0.25)
 
     #matapelajaran
@@ -114,19 +107,19 @@ def main_run() :
 
     mapelAva = ('Biologi', 'Matematika', 'Fisika', 'Kimia', 'Ekonomi', 'Sosiologi', 'Geografi', 
                 'Bahasa Inggris', 'Bahasa Indonesia', 'Sejarah')
-    varmapel = tk.StringVar()
-    mapelEntry = Combobox(frame, value=mapelAva, textvariable = varmapel)
+    varmapel2 = tk.StringVar()
+    mapelEntry = Combobox(frame, value=mapelAva, textvariable = varmapel2, state="readonly")
     mapelEntry.place(relx=0.3, rely=0.3, relwidth=0.6)
 
     #durasi
     label4 = tk.Label(frame, text='Durasi', font=40, bg = '#80c1ff')
     label4.place(relx=0.1, rely=0.35)
 
-    vardur = tk.IntVar()
-    dur1 = tk.Radiobutton(frame, text="1 Jam", variable=vardur, value=1)
+    vardur2 = tk.IntVar()
+    dur1 = tk.Radiobutton(frame, text="1 Jam", variable=vardur2, value=1)
     dur1.place(relx=0.3, rely=0.35)
 
-    dur2 = tk.Radiobutton(frame, text="2 Jam", variable=vardur, value=2)
+    dur2 = tk.Radiobutton(frame, text="2 Jam", variable=vardur2, value=2)
     dur2.place(relx=0.5, rely=0.35)
 
     #hari
@@ -134,8 +127,8 @@ def main_run() :
     label4.place(relx=0.1, rely=0.4)
 
     hariAva = ('Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu')
-    varhari = tk.StringVar()
-    hariEntry = Combobox(frame, value=hariAva, textvariable = varhari)
+    varhari2 = tk.StringVar()
+    hariEntry = Combobox(frame, value=hariAva, textvariable = varhari2, state="readonly")
     hariEntry.place(relx=0.3, rely=0.4, relwidth=0.6)
                 
 
@@ -143,25 +136,25 @@ def main_run() :
     label4 = tk.Label(frame, text='Jam Mulai', font=40, bg = '#80c1ff')
     label4.place(relx=0.1, rely=0.45)
 
-    varjam = tk.StringVar()
+    varjam2 = tk.StringVar()
     jamAva = ('08.00 WIB', '09.00 WIB','10.00 WIB','11.00 WIB','12.00 WIB','13.00 WIB','14.00 WIB','15.00 WIB',
                 '16.00 WIB','17.00 WIB','18.00 WIB','19.00 WIB','20.00 WIB')
-    jamEntry = Combobox(frame, value=jamAva, textvariable = varjam)
+    jamEntry = Combobox(frame, value=jamAva, textvariable = varjam2, state="readonly")
     jamEntry.place(relx=0.3, rely=0.45, relwidth=0.6)
 
     #deskripsi
     label4 = tk.Label(frame, text='Deskripsi', font=40, bg = '#80c1ff')
     label4.place(relx=0.1, rely=0.5)
 
-    textbox4 = tk.Entry(frame, font=25)
-    textbox4.place(relx=0.3, rely=0.5, relwidth=0.6, relheight=0.25)
+    textbox4s = tk.Entry(frame, font=25)
+    textbox4s.place(relx=0.3, rely=0.5, relwidth=0.6, relheight=0.25)
 
     # fungsiantara
     def saveFormAntara() :
-        saveForm(int(textbox1.get()), textbox3.get(), varje.get(), varting.get(), varmapel.get(), vardur.get(), varhari.get(), varjam.get(), textbox4.get())
+        saveForm(int(textbox1s.get()), textbox3s.get(), varje2.get(), varting2.get(), varmapel2.get(), vardur2.get(), varhari2.get(), varjam2.get(), textbox4s.get())
 
-    button = tk.Button(frame, text="Submit Form", bd=2, command=saveFormAntara)
-    button.place(relx=0.75, rely=0.8)
+    buttonsave = tk.Button(frame, text="Submit Form", bd=2, command=saveFormAntara)
+    buttonsave.place(relx=0.75, rely=0.8)
 
     button2 = tk.Button(frame, text="Back", bd=2, command=lambda:raise_frame(frame2))
     button2.place(relx=0.65, rely=0.8)
@@ -174,35 +167,39 @@ def main_run() :
     labelf2 = tk.Label(frame2, text='My ID', font=40, bg = '#80c1ff')
     labelf2.place(relx=0.1, rely=0.1)
 
-    textboxf1 = tk.Entry(frame2, font=25)
+    varid = tk.StringVar()
+    textboxf1 = tk.Entry(frame2, font=25, textvariable = varid)
     textboxf1.place(relx=0.2, rely=0.1, relwidth=0.5)
 
     scrollbar = tk.Scrollbar(frame2, orient=tk.VERTICAL)
     scrollbar.place(relx=0.05, rely=0.2, relwidth=0.9, relheight=0.7)
 
-    mylist = tk.Listbox(frame2, yscrollcommand = scrollbar.set, font=40 )
-    mylist.place(relx=0.05, rely=0.2, relwidth=0.9, relheight=0.7)
+    mylist2 = tk.Listbox(frame2, yscrollcommand = scrollbar.set, font=40 )
+    mylist2.place(relx=0.05, rely=0.2, relwidth=0.9, relheight=0.7)
+    #mylist.insert(tk.END,'1')
 
-    scrollbar.config( command = mylist.yview )
+    scrollbar.config(command = mylist2.yview)
 
     # fungsi antara
-    def textboxf1F(): 
-        showSchedule(mylist, textboxf1.get())
+    def ScheduleShow(): 
+        showSchedule(mylist2, varid.get())
 
-    buttonf1 = tk.Button(frame2, text="Submit", bd=2, command=textboxf1F)
+    buttonf1 = tk.Button(frame2, text="Submit", bd=2, command=ScheduleShow)
     buttonf1.place(relx=0.75, rely=0.1)
     # print(textboxf1.get())
 
     buttonf2 = tk.Button(frame2, text="Add Schedule", bd=2, command=lambda:raise_frame(frame))
     buttonf2.place(relx=0.75, rely=0.93)
 
-    buttonf3 = tk.Button(frame2, text="Delete Selected Schedule", bd=2, command=lambda:deleteJadwal(mylist))
+    # fungsi antara
+    def deleteSchedule(): 
+        deleteJadwal(mylist2, varid.get())
+
+    buttonf3 = tk.Button(frame2, text="Delete Selected Schedule", bd=2, command=deleteSchedule)
     buttonf3.place(relx=0.5, rely=0.93)
 
     button2 = tk.Button(frame2, text="Back", bd=2, command=lambda:raise_frame(frame4))
     button2.place(relx=0.25, rely=0.93)
-
-
 
     # #==============frame5===================
     #judul
@@ -244,8 +241,6 @@ def main_run() :
     ting3 = tk.Radiobutton(frame5, text="Kelas 3", variable=varting, value=3)
     ting3.place(relx=0.7, rely=0.5)
 
-    button2 = tk.Button(frame5, text="Back", bd=2, command=lambda:raise_frame(frame4))
-    button2.place(relx=0.25, rely=0.8)
 
 
     #hari
@@ -259,13 +254,13 @@ def main_run() :
 
 
     # # #==============frame6===================
-    # scrollbar = tk.Scrollbar(frame6, orient=tk.VERTICAL)
-    # scrollbar.place(relx=0.05, rely=0, relwidth=0.9, relheight=0.85)
+    scrollbar = tk.Scrollbar(frame6, orient=tk.VERTICAL)
+    scrollbar.place(relx=0.05, rely=0, relwidth=0.9, relheight=0.85)
 
-    # mylist = tk.Listbox(frame6, yscrollcommand = scrollbar.set )
-    # mylist.place(relx=0.05, rely=0, relwidth=0.9, relheight=0.85)
+    mylist = tk.Listbox(frame6, yscrollcommand = scrollbar.set )
+    mylist.place(relx=0.05, rely=0, relwidth=0.9, relheight=0.85)
 
-    # scrollbar.config( command = mylist.yview )
+    scrollbar.config( command = mylist.yview )
 
     def searchTutorAntara() : 
         searchTutor(mylist, varje.get(), varting.get(), varmapel.get(), varhari.get())
@@ -279,21 +274,23 @@ def main_run() :
     button2 = tk.Button(frame6, text="Pesan Tutor", bd=2, command=konfirmasiPemesanan)
     button2.place(relx=0.75, rely=0.9)
 
-
+    button2 = tk.Button(frame6, text="Back", bd=2, command=lambda:raise_frame(frame4))
+    button2.place(relx=0.5, rely=0.9)
 
     # #==============frame7===================
 
     labelf1 = tk.Label(frame7, text="Kehadiran", bg = '#80c1ff', font=50)
-    labelf1.place(relx=0.4, rely=0.8)
+    labelf1.place(relx=0.45, rely=0.1)
 
     labelf2 = tk.Label(frame7, text='Course ID', font=40, bg = '#80c1ff')
-    labelf2.place(relx=0.1, rely=0.4)
+    labelf2.place(relx=0.1, rely=0.2)
 
     textboxf1 = tk.Entry(frame7, font=25)
-    textboxf1.place(relx=0.2, rely=0.4, relwidth=0.5)
+    textboxf1.place(relx=0.23, rely=0.2, relwidth=0.5)
 
     tv = ttk.Treeview(frame7, columns=(1, 2, 3, 4), show="headings", height="5")
-    tv.pack()
+    tv.place(relx=0, rely=0.4, relwidth=1, relheight=0.45)
+    #tv.pack()
 
     arrays = [['INV-001', 'Openlane', '05/10/2020', 'Attended'],
             ['INV-002', 'Gogozoom', '05/10/2020', 'Attended'],
@@ -308,13 +305,13 @@ def main_run() :
         tv.insert('', 'end', values=i)
 
     # fungsi antara
-    def textboxf1F(): 
-        showSchedule(mylist, textboxf1.get())
+    # def textboxf1F(): 
+    #     showSchedule(mylist, textboxf1.get())
 
-    buttonf1 = tk.Button(frame7, text="Submit", bd=2, command=textboxf1F)
-    buttonf1.place(relx=0.75, rely=0.4)
+    # buttonf1 = tk.Button(frame7, text="Submit", bd=2, command=textboxf1F)
+    # buttonf1.place(relx=0.8, rely=0.2)
     button2 = tk.Button(frame7, text="Back", bd=2, command=lambda:raise_frame(frame4))
-    button2.place(relx=0.25, rely=0.8)
+    button2.place(relx=0.8, rely=0.9)
     # print(textboxf1.get())
 
 
@@ -325,26 +322,23 @@ def main_run() :
     labelf1.place(relx=0.4, rely=0)
 
     buttonf1 = tk.Button(frame4, text="Jadwal Tutor", bd=2, command=lambda:raise_frame(frame2))
-    buttonf1.place(relx=0.6, rely=0.1)
+    buttonf1.place(relx=0.65, rely=0.1)
 
-    buttonf2 = tk.Button(frame4, text="Search Tutor", bd=2, command=lambda:raise_frame(frame5))
-    buttonf2.place(relx=0.8, rely=0.1)
+    buttonf2 = tk.Button(frame4, text="Search Tutor", bd=2, command=lambda:[raise_frame(frame5),raise_frame(frame6)])
+    buttonf2.place(relx=0.5, rely=0.1)
 
     # 
     def goto_pesanan() : 
         Pemesanan.makeForm()
 
     buttonf3 = tk.Button(frame4, text="Pemesanan", bd=2, command=goto_pesanan)
-    buttonf3.place(relx=0.4, rely=0.1)
+    buttonf3.place(relx=0.35, rely=0.1)
 
     buttonf4 = tk.Button(frame4, text="Kehadiran", bd=2, command=lambda:raise_frame(frame7))
     buttonf4.place(relx=0.2, rely=0.1)
 
-
-    buttonf4 = tk.Button(frame4, text="Edit Akun", bd=2, command=editRun)
-    buttonf4.place(relx=0, rely=0.1)
-
-
+    buttonf5 = tk.Button(frame4, text="Edit Akun", bd=2, command=editRun)
+    buttonf5.place(relx=0, rely=0.1)
 
     raise_frame(frame4)
     main.mainloop()
