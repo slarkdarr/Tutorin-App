@@ -11,6 +11,7 @@ from searchTutor import *
 from pemesanan import *
 from home import *
 from loginModule import *
+from akunModule import *
 
 def raise_frame(fname):
     fname.tkraise()
@@ -324,20 +325,33 @@ def main_run() :
     labelf1.place(relx=0.4, rely=0)
 
     buttonf1 = tk.Button(frame4, text="Jadwal Tutor", bd=2, command=lambda:raise_frame(frame2))
-    buttonf1.place(relx=0.75, rely=0.1)
+    buttonf1.place(relx=0.6, rely=0.1)
 
     buttonf2 = tk.Button(frame4, text="Search Tutor", bd=2, command=lambda:raise_frame(frame5))
-    buttonf2.place(relx=0.5, rely=0.1)
+    buttonf2.place(relx=0.8, rely=0.1)
 
     # 
     def goto_pesanan() : 
         Pemesanan.makeForm()
 
     buttonf3 = tk.Button(frame4, text="Pemesanan", bd=2, command=goto_pesanan)
-    buttonf3.place(relx=0.25, rely=0.1)
+    buttonf3.place(relx=0.4, rely=0.1)
 
     buttonf4 = tk.Button(frame4, text="Kehadiran", bd=2, command=lambda:raise_frame(frame7))
+    buttonf4.place(relx=0.2, rely=0.1)
+
+    def editAkun() :
+        app = AkunTutor("dwi")
+        app.run()
+
+
+    buttonf4 = tk.Button(frame4, text="Edit Akun", bd=2, command=editAkun)
     buttonf4.place(relx=0, rely=0.1)
+
+
+
+
+
 
     raise_frame(frame4)
     main.mainloop()
