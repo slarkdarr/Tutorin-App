@@ -1,5 +1,5 @@
 import pytest
-from datetime import datetime
+import mysql.connector as mysql
 from pembayaran import *
 from pemesanan import *
 
@@ -25,4 +25,4 @@ def test_insertToPembayaran1():			# Testing Insert to Database Pembayaran
 	assert(insertFormPembayaran(39208329, 92018527, 48290129, 92018372, "2021-10-19 00:59:33.870541", 100000, False)==1)
 
 def test_insertToPembayaran2():			# Testing Insert to Database Pembayaran (but duplicate data(double OrderID))
-	assert(insertFormPembayaran(12345678, 12345678, 12345678, 12345678, datetime.now(), 0, True)==0)
+	assert(insertFormPembayaran(12345678, 12345678, 12345678, 12345678, "2021-10-21 22:10:33.870541", 0, True)==0)
