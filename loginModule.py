@@ -3,6 +3,9 @@ from tkinter import messagebox
 from tkinter.ttk import Combobox
 import mysql.connector as mysql
 
+from main import *
+
+# isLogin = False
 
 class Login:
     '''
@@ -16,6 +19,7 @@ class Login:
         :params — loginWindow, label, username
         '''
         # Variables for Tkinter
+        self.isLogin = False
         self.loginWindow = Tk()
         self.loginWindow.title('Login')
         self.loginWindow.geometry('300x250')
@@ -36,7 +40,7 @@ class Login:
         self.submit.place(x=100, y=150)
 
     def checkDatabase(self, username, password):
-        con = mysql.connect(host="localhost", user="root", password="root", database="tutorin")
+        con = mysql.connect(host="localhost", user="root", password="", database="tutorin")
         cursor = con.cursor()
 
         cursor.execute("SELECT * FROM user WHERE username ='"+username+"'")
@@ -45,19 +49,19 @@ class Login:
         if row[0][1] == username:
             return row[0][2] == password
 
-
+    
     def validate(self):
 
         username = self.usernameE.get()
         password = self.passwordE.get()
 
-        try:
+        try :
             if (self.checkDatabase(username, password)):
-                self.isLogin = True
                 messagebox.showinfo('Successful', 'Login was sucessful')
-            else:
+                main_run()
+            else :
                 messagebox.showerror('Error', 'Wrong Credentials')
-        except:
+        except :
             messagebox.showerror('Error', 'Wrong Credentials')
         
 
@@ -183,7 +187,7 @@ class RegisterTutor:
         self.registerWindow.mainloop()
     
     def searchData(self, username):
-        con = mysql.connect(host="localhost", user="root", password="root", database="tutorin")
+        con = mysql.connect(host="localhost", user="root", password="", database="tutorin")
         cursor = con.cursor()
 
         cursor.execute("SELECT * FROM user WHERE username ='"+username+"'")
@@ -195,7 +199,7 @@ class RegisterTutor:
 
     def add(self):
 
-        con = mysql.connect(host="localhost", user="root", password="root", database="tutorin")
+        con = mysql.connect(host="localhost", user="root", password="", database="tutorin")
         cursor = con.cursor()
 
         id = 1;
@@ -226,22 +230,6 @@ class RegisterTutor:
             messagebox.showwarning("Warning", 'Username already exists')
 
         con.close()
-
-def validate(username, password):
-
-    try:
-        if (password=="admin"):
-            return 1
-        else:
-            return 0
-    except:
-        return 0
-
-def searchData(username):
-
-    if username != "admin":
-        return 1
-    return 0
 
 class RegisterMurid:
     '''
@@ -313,12 +301,14 @@ class RegisterMurid:
         self.submit = Button(self.registerWindow, text='Submit', pady=5, padx=20, command=self.add)
         # self.submit.place(x=110, y=630)
         self.submit.pack(side=TOP, pady=10)
-             
+            
+        
+        
     def run(self):
         self.registerWindow.mainloop()
     
     def searchData(self, username):
-        con = mysql.connect(host="localhost", user="root", password="root", database="tutorin")
+        con = mysql.connect(host="localhost", user="root", password="", database="tutorin")
         cursor = con.cursor()
 
         cursor.execute("SELECT * FROM user WHERE username ='"+username+"'")
@@ -330,7 +320,7 @@ class RegisterMurid:
 
     def add(self):
 
-        con = mysql.connect(host="localhost", user="root", password="root", database="tutorin")
+        con = mysql.connect(host="localhost", user="root", password="", database="tutorin")
         cursor = con.cursor()
 
         id = 1;
@@ -363,4 +353,3 @@ class RegisterMurid:
         #     messagebox.showinfo('Successful', 'Username was added')
         # else:
         #     messagebox.showwarning("Warning", 'Username already exists')
-

@@ -20,6 +20,9 @@ from home import *
 from loginModule import *
 from akunMain import *
 
+def raise_frame(fname):
+    fname.tkraise()
+
 HEIGHT = 670
 WIDTH = 800
 

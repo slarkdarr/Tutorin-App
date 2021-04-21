@@ -58,6 +58,9 @@ def getID2(data, data2) :
             return x[0]
     return 0
 
+def message(title, text):
+   tk.MessageBox.showinfo(title, text)
+
 def saveForm(textbox1, textbox3, varje, varting, varmapel, vardur, varhari, varjam, textbox4): 
     # conn = mysql.connect(host="localhost", user="root", password="", database="tutorin")
     # c = conn.cursor()
