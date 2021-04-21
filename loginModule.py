@@ -358,3 +358,9 @@ def validate(username, password):
             return 0
     except:
         return 0
+
+def searchData(username):
+
+    if username != "admin":
+        return 1
+    return 0
