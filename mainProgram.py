@@ -5,6 +5,8 @@ import csv
 import sqlite3
 from tkinter.ttk import Combobox
 import mysql.connector as mysql 
+import matplotlib
+matplotlib.use('Agg')
 
 from jadwalTutor import * 
 from searchTutor import *

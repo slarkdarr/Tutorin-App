@@ -3,6 +3,8 @@ import csv
 from tkinter.ttk import Combobox
 from tkinter import messagebox
 import sqlite3
+import matplotlib
+matplotlib.use('Agg')
 
 def searchTutor(list, varje, varting, varmapel, varhari):
    conn = sqlite3.connect('Tutorin.db')

@@ -4,6 +4,8 @@ import csv
 import sqlite3
 from tkinter.ttk import Combobox
 import mysql.connector as mysql 
+import matplotlib
+matplotlib.use('Agg')
 
 def getIntJam(jam):
     value = 0
