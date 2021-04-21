@@ -19,5 +19,4 @@ Test :
   when:
     on_success
   script:
-  - export DISPLAY=:0.0
   - python tesjadwal.py

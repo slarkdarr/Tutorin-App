@@ -89,12 +89,6 @@ def searchTutor(list, varje, varting, varmapel, varhari):
 def konfirmasiPemesanan():
    MsgBox = messagebox.askquestion("askquestion", "Apakah Ada Yakin Ingin Melakukan Pemesanan?")
 
-def checkSearch(varje, varting, varmapel, varhari):
-   list = tk.Listbox()
-   searchTutor(list, varje, varting, varmapel, varhari)
-   if(list.size == 0):
-      return 0 #listbox kosong, pencarian tidak berhasil
-   return 1 #pencarian berhasil
 
 # HEIGHT = 670
 # WIDTH = 800
