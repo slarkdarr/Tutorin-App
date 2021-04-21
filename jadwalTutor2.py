@@ -7,6 +7,8 @@ import sqlite3
 class jadwalTutor:
     def __init__(self):
         self.jadwal = tk.Tk()
+        self.jadwal.title('Jadwal Tutor')
+        self.jadwal.geometry('800x670')
         HEIGHT = 670
         WIDTH = 800
         #create canvas
@@ -297,5 +299,5 @@ class jadwalTutor:
         self.raise_frame(self.frame2)
         self.jadwal.mainloop()
 
-# e = jadwalTutor()
-# e.run()
+e = jadwalTutor()
+e.run()
