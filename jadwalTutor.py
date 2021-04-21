@@ -195,7 +195,7 @@ def checkDatabaseJadwal(id,courseid,hari,jam,durasi,desc):
     c.execute("SELECT rowid, * FROM JadwalTutor WHERE tutorID = (?) AND courseID = (?) AND hari = (?) AND jamMulai = (?) AND durasi = (?) AND deskripsi = (?)", (id,courseid,hari,jam,durasi,desc,))
     data = c.fetchall()
 
-    if(data.len == 0):
+    if(len(data) == 0):
         return 0 #tidak ada data ditemukan
     return 1 #data ditemukan
 
