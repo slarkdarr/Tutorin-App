@@ -141,13 +141,13 @@ def showSchedule(list, textf1) :
     conn.commit()
     conn.close()
 
-def deleteJadwal(list):
+def deleteJadwal(list, text):
     MsgBox = messagebox.askquestion("askquestion", "Are you sure?")
     if (MsgBox == 'yes'):
         conn = sqlite3.connect('Tutorin.db')
         c = conn.cursor()
 
-        id = textboxf1.get()
+        id = text
         sel = list.curselection()
         i = int(list.get(sel)[0]) - 1
         #print(list.get(sel)[0])
@@ -175,3 +175,16 @@ def deleteJadwal(list):
         conn.commit()
         conn.close()
 
+def checkDatabaseJadwal(id,courseid,hari,jam,durasi,desc):
+    conn = sqlite3.connect('Tutorin.db')
+    c = conn.cursor()
+
+    c.execute("SELECT rowid, * FROM JadwalTutor WHERE tutorID = (?) AND courseID = (?) AND hari = (?) AND jamMulai = (?) AND durasi = (?) AND deskripsi = (?)", (id,courseid,hari,jam,durasi,desc,))
+    data = c.fetchall()
+
+    if(data.len == 0):
+        return 0 #tidak ada data ditemukan
+    return 1 #data ditemukan
+
+    conn.commit()
+    conn.close()

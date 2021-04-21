@@ -197,7 +197,7 @@ buttonf1.place(relx=0.75, rely=0.1)
 buttonf2 = tk.Button(frame2, text="Add Schedule", bd=2, command=lambda:raise_frame(frame))
 buttonf2.place(relx=0.75, rely=0.93)
 
-buttonf3 = tk.Button(frame2, text="Delete Selected Schedule", bd=2, command=lambda:deleteJadwal(mylist2))
+buttonf3 = tk.Button(frame2, text="Delete Selected Schedule", bd=2, command=lambda:deleteJadwal(mylist2, varid.get()))
 buttonf3.place(relx=0.5, rely=0.93)
 
 button2 = tk.Button(frame2, text="Back", bd=2, command=lambda:raise_frame(frame4))
