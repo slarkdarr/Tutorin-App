@@ -1,0 +1,40 @@
+CREATE TABLE IF NOT EXISTS Pembayaran (
+	OrderID int NOT NULL,
+	MuridID int NOT NULL,
+	TutorID int NOT NULL,
+	CourseID int NOT NULL,
+	WaktuMengajar datetime NOT NULL,
+	Nominal int NOT NULL,
+	StatusPembayaran int NOT NULL,
+	PRIMARY KEY (OrderID),
+	CONSTRAINT FK_muridID
+		FOREIGN KEY (MuridID) REFERENCES Murid(MuridID)
+		ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT FK_tutorID
+		FOREIGN KEY (TutorID) REFERENCES Tutor(TutorID)
+		ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Pemesanan (
+	OrderID int NOT NULL,
+	MuridID int NOT NULL,
+	TutorID int NOT NULL,
+	TutorName varchar(255) NOT NULL,
+	MataPelajaran varchar(10) NOT NULL,
+	Jenjang varchar(3) NOT NULL,
+	Tingkat int NOT NULL,
+	Hari varchar(7) NOT NULL,
+	PRIMARY KEY (OrderID),
+	CONSTRAING FK_muridID
+		FOREIGN KEY (MuridID) REFERENCES Murid(MuridID)
+		ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT FK_tutorID
+		FOREIGN KEY (TutorID) REFERENCES Tutor(TutorID)
+		ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT FK_tutorName
+		FOREIGN KEY (TutorName) REFERENCES Tutor(TutorName)
+		ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT FK_mataPelajaran
+		FOREIGN KEY (MataPelajaran) REFERENCES DetailCourse(MataPelajaran)
+		ON UPDATE CASCADE ON DELETE CASCADE
+);

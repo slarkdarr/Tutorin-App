@@ -9,14 +9,15 @@ before_script:
   - python -m pip install mysql-connector
 # different stages in the pipeline
 stages:
+  - Static Analysis
   - Test
-  - Deliver
-
-Test :
-  stage: Test
-  only:
-    - jadwal_tutor
-  when:
-    on_success
+#defines the job in Static Analysis
+pylint:
+  stage: Static Analysis
   script:
-  - python tesjadwal.py
+  - pylint --disable=C,W,R *.py
+
+pytest:
+  stage: Test
+  script:
+  - pytest
