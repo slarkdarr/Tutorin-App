@@ -4,9 +4,54 @@ from tkinter.ttk import Combobox
 from tkinter import messagebox
 import sqlite3
 
+def getIntJam(jam):
+    value = 0
+    if(jam == "08.00 WIB"):
+        value = 8
+    elif(jam == "09.00 WIB"):
+        value = 9
+    elif(jam == "10.00 WIB"):
+        value = 10
+    elif(jam == "11.00 WIB"):
+        value = 11
+    elif(jam == "12.00 WIB"):
+        value = 12
+    elif(jam == "13.00 WIB"):
+        value = 13
+    elif(jam == "14.00 WIB"):
+        value = 14
+    elif(jam == "15.00 WIB"):
+        value = 15
+    elif(jam == "16.00 WIB"):
+        value = 16
+    elif(jam == "17.00 WIB"):
+        value = 17
+    elif(jam == "18.00 WIB"):
+        value = 18
+    elif(jam == "19.00 WIB"):
+        value = 19
+    elif(jam == "20.00 WIB"):
+        value = 20
+    return value
+
+def getID(data, mapel, ting, jen):
+    for x in data:
+        #print(x)
+        if(x[1] == mapel and x[2] == jen and x[3] == ting):
+            return x[0]
+    return 0
+
+def getID2(data, data2) :
+    for x in data:
+        if(x == data2):
+            return x[0]
+    return 0
+
 class jadwalTutor:
     def __init__(self):
         self.jadwal = tk.Tk()
+        self.jadwal.title('Jadwal Tutor')
+        self.jadwal.geometry('800x670')
         HEIGHT = 670
         WIDTH = 800
         #create canvas
@@ -146,51 +191,6 @@ class jadwalTutor:
         self.buttonf3 = tk.Button(self.frame2, text="Delete Selected Schedule", bd=2, command=lambda:self.deleteJadwal(self.mylist))
         self.buttonf3.place(relx=0.5, rely=0.93)
 
-    def getIntJam(self, jam):
-        value = 0
-        if(jam == "08.00 WIB"):
-            value = 8
-        elif(jam == "09.00 WIB"):
-            value = 9
-        elif(jam == "10.00 WIB"):
-            value = 10
-        elif(jam == "11.00 WIB"):
-            value = 11
-        elif(jam == "12.00 WIB"):
-            value = 12
-        elif(jam == "13.00 WIB"):
-            value = 13
-        elif(jam == "14.00 WIB"):
-            value = 14
-        elif(jam == "15.00 WIB"):
-            value = 15
-        elif(jam == "16.00 WIB"):
-            value = 16
-        elif(jam == "17.00 WIB"):
-            value = 17
-        elif(jam == "18.00 WIB"):
-            value = 18
-        elif(jam == "19.00 WIB"):
-            value = 19
-        elif(jam == "20.00 WIB"):
-            value = 20
-        return value
-
-    def PrintArray(self, arr):
-        for x in arr:
-            print(x)
-
-    def getID(self, data, mapel, ting, jen):
-        for x in data:
-            if(x[1] == mapel and x[2] == jen and x[3] == ting):
-                return x[0]
-        return 0
-
-    def getID2(self, data, data2) :
-        for x in data:
-            if(x == data2):
-                return x[0]
-        return 0
 
     def saveForm(self):
         conn = sqlite3.connect('Tutorin.db')
@@ -207,7 +207,7 @@ class jadwalTutor:
         mapel = self.varmapel.get()
         durasi = self.vardur.get()
         hari = self.varhari.get()
-        jam = self.getIntJam(self.varjam.get())
+        jam = getIntJam(self.varjam.get())
         desc = self.textbox4.get()
         if(desc == ""):
             desc = "Tidak Ada"
@@ -220,7 +220,7 @@ class jadwalTutor:
             #dapetin IDcourse
             c.execute("SELECT rowid, * FROM DetailCourse")
             data = c.fetchall()
-            courseid = self.getID(data, mapel, ting, jen)
+            courseid = getID(data, mapel, ting, jen)
 
             #print(courseid)
             nrow = [id,courseid,hari,jam,durasi,desc]
@@ -279,7 +279,7 @@ class jadwalTutor:
             c.execute("SELECT rowid, * FROM JadwalTutor WHERE tutorID = (?)", (id,))
             data2 = c.fetchall()
 
-            row = int(self.getID2(data, data2[i]))
+            row = int(getID2(data, data2[i]))
             #print(row)
             #hapus data dari database
             c.execute("DELETE FROM JadwalTutor WHERE rowid = (?)",(row,))

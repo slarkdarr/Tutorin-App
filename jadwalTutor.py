@@ -4,6 +4,13 @@ import csv
 import sqlite3
 from tkinter.ttk import Combobox
 import mysql.connector as mysql 
+from tkinter import *
+# import sys
+# import os
+
+# if os.environ.get('DISPLAY','') == '':
+#     print('no display found. Using :0.0')
+#     os.environ.__setitem__('DISPLAY', ':0.0')
 
 def getIntJam(jam):
     value = 0
@@ -55,7 +62,10 @@ def message(title, text):
    tk.MessageBox.showinfo(title, text)
 
 def saveForm(textbox1, textbox3, varje, varting, varmapel, vardur, varhari, varjam, textbox4): 
-    conn = mysql.connect(host="localhost", user="root", password="", database="tutorin")
+    # conn = mysql.connect(host="localhost", user="root", password="", database="tutorin")
+    # c = conn.cursor()
+
+    conn = sqlite3.connect('Tutorin.db')
     c = conn.cursor()
 
     id = textbox1
@@ -80,18 +90,20 @@ def saveForm(textbox1, textbox3, varje, varting, varmapel, vardur, varhari, varj
         #print("gagal")
     else:
         #dapetin IDcourse
-        c.execute("SELECT * FROM detailcourse")
+        c.execute("SELECT rowid, * FROM detailcourse")
         data = c.fetchall()
         courseid = getID(data, mapel, ting, jen)
-
-        #print(courseid)
-        nrow = [id,courseid,hari,jam,durasi,desc]
-        print(nrow)
-        #insert data to database
-        c.execute("insert into jadwaltutor(tutorid, courseid, hari, jamMulai, durasi, deskripsi) values(",id,","+ str(courseid)+",'"+hari+"',"+str(jam)+","+ str(durasi)+",'"+desc+"')")
-         #show messagebox
-        messagebox.showinfo("Info", "Berhasil Menyimpan Data")
-        #print("sukses")
+        print(mapel)
+        if(courseid != 0):
+            #print(courseid)
+            nrow = [id,courseid,hari,jam,durasi,desc]
+            print(nrow)
+            #insert data to database
+            c.execute("INSERT INTO JadwalTutor VALUES (?,?,?,?,?,?)", nrow)
+            # c.execute("insert into jadwaltutor(tutorid, courseid, hari, jamMulai, durasi, deskripsi) values(",id,","+ str(courseid)+",'"+hari+"',"+str(jam)+","+ str(durasi)+",'"+desc+"')")
+            #show messagebox
+            messagebox.showinfo("Info", "Berhasil Menyimpan Data")
+            #print("sukses")
     conn.commit()
     conn.close()
 
@@ -119,7 +131,7 @@ def showSchedule(list, textf1) :
     
 
     #tampilkan schedule dari tutor
-    print(textf1)
+    #print(textf1)
     id = textf1
 
     #ambil data jadwal
@@ -133,7 +145,8 @@ def showSchedule(list, textf1) :
     for x in data :
         c.execute("SELECT rowid, * FROM DetailCourse WHERE rowid = (?)", (x[2],))
         data2 = c.fetchall()
-        #print(data2)
+        # print(x)
+        # print(data2)
         text = (str(i) + ". Mata Pelajaran : " + data2[0][1] + " | " + data2[0][2] + " Kelas " + str(data2[0][3]) + " | Hari : " + x[3] + " | " + "Jam Mulai : " + str(x[4]) + ".00 WIB")
         i = i + 1
         list.insert(tk.END,text)
@@ -141,13 +154,13 @@ def showSchedule(list, textf1) :
     conn.commit()
     conn.close()
 
-def deleteJadwal(list):
+def deleteJadwal(list, text):
     MsgBox = messagebox.askquestion("askquestion", "Are you sure?")
     if (MsgBox == 'yes'):
         conn = sqlite3.connect('Tutorin.db')
         c = conn.cursor()
 
-        id = textboxf1.get()
+        id = text
         sel = list.curselection()
         i = int(list.get(sel)[0]) - 1
         #print(list.get(sel)[0])
@@ -174,4 +187,18 @@ def deleteJadwal(list):
 
         conn.commit()
         conn.close()
+
+def checkDatabaseJadwal(id,courseid,hari,jam,durasi,desc):
+    conn = sqlite3.connect('Tutorin.db')
+    c = conn.cursor()
+
+    c.execute("SELECT rowid, * FROM JadwalTutor WHERE tutorID = (?) AND courseID = (?) AND hari = (?) AND jamMulai = (?) AND durasi = (?) AND deskripsi = (?)", (id,courseid,hari,jam,durasi,desc,))
+    data = c.fetchall()
+
+    if(len(data) == 0):
+        return 0 #tidak ada data ditemukan
+    return 1 #data ditemukan
+
+    conn.commit()
+    conn.close()
 

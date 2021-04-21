@@ -3,6 +3,13 @@ import csv
 from tkinter.ttk import Combobox
 from tkinter import messagebox
 import sqlite3
+from tkinter import *
+# import sys
+# import os
+
+# if os.environ.get('DISPLAY','') == '':
+#     print('no display found. Using :0.0')
+#     os.environ.__setitem__('DISPLAY', ':0.0')
 
 def searchTutor(list, varje, varting, varmapel, varhari):
    conn = sqlite3.connect('Tutorin.db')
@@ -81,6 +88,7 @@ def searchTutor(list, varje, varting, varmapel, varhari):
 
 def konfirmasiPemesanan():
    MsgBox = messagebox.askquestion("askquestion", "Apakah Ada Yakin Ingin Melakukan Pemesanan?")
+
 
 # HEIGHT = 670
 # WIDTH = 800

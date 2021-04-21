@@ -54,17 +54,17 @@ c = conn.cursor()
 # c.executemany("INSERT INTO DetailCourse VALUES (?,?,?)", course)
 
 #manampilkan isi deatilcourse
-# c.execute("SELECT rowid, * FROM DetailCourse")
+c.execute("SELECT rowid, * FROM DetailCourse")
 # c.execute("SELECT rowid, * FROM DetailCourse WHERE namaMapel = (?) AND jenjang = (?)",('Sejarah','SMA',))
-# items = c.fetchall()
-# for x in items:
-#     print(x)
+items = c.fetchall()
+for x in items:
+    print(x)
 
-# c.execute("DELETE FROM JadwalTutor WHERE jamMulai = 0")
+c.execute("DELETE FROM JadwalTutor WHERE courseid = 0")
 
 # #manampilkan isi jadwal
-# c.execute("SELECT * FROM JadwalTutor")
-c.execute("SELECT rowid, * FROM JadwalTutor WHERE tutorID = (?) AND hari = (?)",(12,'Senin',))
+c.execute("SELECT * FROM JadwalTutor")
+# c.execute("SELECT rowid, * FROM JadwalTutor WHERE tutorID = (?) AND hari = (?)",(12,'Senin',))
 items = c.fetchall()
 for x in items:
     print(x)
