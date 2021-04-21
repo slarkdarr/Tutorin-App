@@ -7,20 +7,20 @@ class dateTime:
 		self.minute = minute
 		self.second = second
 
-	def getYear():
+	def getYear(self):
 		return self.year
 
-	def getMonth():
+	def getMonth(self):
 		return self.month
 
-	def getDay():
+	def getDay(self):
 		return self.day
 
-	def getHour():
+	def getHour(self):
 		return self.hour
 
-	def getMinute():
+	def getMinute(self):
 		return self.minute
 
-	def getSecond():
+	def getSecond(self):
 		return self.second
