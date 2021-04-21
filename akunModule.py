@@ -5,6 +5,39 @@ import mysql.connector as mysql
 import math
 from PIL import ImageTk, Image
 
+def toCurrency(uang):
+    builder = ""
+    count = 0
+    if(uang == 0): return "0"
+    while(uang>0):
+        x = uang%10
+        s = ""
+        if(x == 0): s = "0"
+        elif(x == 1): s = "1"
+        elif(x == 2): s = "2"
+        elif(x == 3): s = "3"
+        elif(x == 4): s = "4"
+        elif(x == 5): s = "5"
+        elif(x == 6): s = "6"
+        elif(x == 7): s = "7"
+        elif(x == 8): s = "8"
+        elif(x == 9): s = "9"
+        if(count == 3):
+            builder = s + "." + builder
+            count -= 3
+        else:
+                builder = s + builder
+        count+=1
+        uang= math.floor(uang/10)
+    return builder
+
+def isInt(uang):
+    try :
+        s = int(uang)
+        return True
+    except :
+        return False
+    return False
 
 class AkunMurid:
     def __init__(self, usernameS):
