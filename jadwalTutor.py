@@ -89,18 +89,20 @@ def saveForm(textbox1, textbox3, varje, varting, varmapel, vardur, varhari, varj
         #print("gagal")
     else:
         #dapetin IDcourse
-        c.execute("SELECT * FROM detailcourse")
+        c.execute("SELECT rowid, * FROM detailcourse")
         data = c.fetchall()
         courseid = getID(data, mapel, ting, jen)
-
-        #print(courseid)
-        nrow = [id,courseid,hari,jam,durasi,desc]
-        print(nrow)
-        #insert data to database
-        c.execute("insert into jadwaltutor(tutorid, courseid, hari, jamMulai, durasi, deskripsi) values(",id,","+ str(courseid)+",'"+hari+"',"+str(jam)+","+ str(durasi)+",'"+desc+"')")
-         #show messagebox
-        messagebox.showinfo("Info", "Berhasil Menyimpan Data")
-        #print("sukses")
+        print(mapel)
+        if(courseid != 0):
+            #print(courseid)
+            nrow = [id,courseid,hari,jam,durasi,desc]
+            print(nrow)
+            #insert data to database
+            c.execute("INSERT INTO JadwalTutor VALUES (?,?,?,?,?,?)", nrow)
+            # c.execute("insert into jadwaltutor(tutorid, courseid, hari, jamMulai, durasi, deskripsi) values(",id,","+ str(courseid)+",'"+hari+"',"+str(jam)+","+ str(durasi)+",'"+desc+"')")
+            #show messagebox
+            messagebox.showinfo("Info", "Berhasil Menyimpan Data")
+            #print("sukses")
     conn.commit()
     conn.close()
 
@@ -142,7 +144,8 @@ def showSchedule(list, textf1) :
     for x in data :
         c.execute("SELECT rowid, * FROM DetailCourse WHERE rowid = (?)", (x[2],))
         data2 = c.fetchall()
-        #print(data2)
+        # print(x)
+        # print(data2)
         text = (str(i) + ". Mata Pelajaran : " + data2[0][1] + " | " + data2[0][2] + " Kelas " + str(data2[0][3]) + " | Hari : " + x[3] + " | " + "Jam Mulai : " + str(x[4]) + ".00 WIB")
         i = i + 1
         list.insert(tk.END,text)
