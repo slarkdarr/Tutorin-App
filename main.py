@@ -10,7 +10,6 @@ from jadwalTutor import *
 from searchTutor import *
 from pemesanan import *
 from home import *
-from loginModule import *
 from akunMain import *
 
 def raise_frame(fname):
