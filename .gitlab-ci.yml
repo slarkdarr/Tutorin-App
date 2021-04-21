@@ -15,7 +15,7 @@ stages:
 pylint:
   stage: Static Analysis
   script:
-  - pylint -d C0301 home.py
+  - pylint -d -all home.py
 
 pytest:
   stage: Test
