@@ -34,9 +34,9 @@ assert(getID2(data,data3)==7)
 # assert(checkTampilanSchedule(1111)==0)
 
 #test saveForm
-saveForm(13, 'saya', 1, 3, 'Matematika', 1, 'Selasa', '09.00 WIB', "Hai")
-assert(checkDatabaseJadwal(13,12,'Selasa','09.00 WIB',1,"Hai")==1)
-assert(checkDatabaseJadwal(11111,12,'Selasa','09.00 WIB',1,"Tidak ada")==0)
+#saveForm(13, 'saya', 1, 3, 'Matematika', 1, 'Selasa', '09.00 WIB', "Hai")
+assert(checkDatabaseJadwal(12,4,'Senin',8,2,"Tidak Ada")==1)
+assert(checkDatabaseJadwal(11111,12,'Selasa',9,1,"Tidak ada")==0)
 
 #test deleteSchedule
 #test searchTutor
