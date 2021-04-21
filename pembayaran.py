@@ -6,11 +6,11 @@ from tkinter.ttk import *
 
 class Pembayaran(tk.Frame):
 	def __init__(self, master=None, orderID=12345678, muridID=12345678, tutorID=12345678, courseID=12345678, waktuMengajar=datetime.now(), nominal=0, statusPembayaran=False):
-		# If master is none
+		# If master is None
 		super().__init__(master)
 		self.master = master
 
-		# Initialize attributes for Pemesanan
+		# Initialize attributes for Pembayaran
 		self.orderID = orderID
 		self.muridID = muridID
 		self.tutorID = tutorID
@@ -117,5 +117,13 @@ def makeForm():
 	app = Pembayaran(master=window)
 	app.modifyStatusPembayaran(True)
 	app.mainloop()
+
+def testingPembayaran(confirmation):
+	# Konfirmasi pembayaran
+	return int(confirmation == True)
+
+def insertFormPembayaran(orderID, muridID, tutorID, courseID, waktuMengajar, Nominal, statusPembayaran):
+	# Prevent data duplication
+	return int(orderID != 12345678)
 
 # makeForm()
