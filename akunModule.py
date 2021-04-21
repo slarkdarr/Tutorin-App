@@ -3,7 +3,7 @@ from tkinter import messagebox
 from tkinter.ttk import Combobox
 import mysql.connector as mysql
 import math
-from PIL import ImageTk, Image
+#from PIL import ImageTk, Image
 
 def toCurrency(uang):
     builder = ""
@@ -46,17 +46,17 @@ class AkunMurid:
         self.akun.geometry('335x250')
         self.getData(usernameS)
 
-        # profile picture
-        stringimg = usernameS + ".png"
-        try:
-            self.img = ImageTk.PhotoImage(Image.open(
-                stringimg).resize((100, 100), Image.ANTIALIAS))
-        except:
-            self.img = ImageTk.PhotoImage(Image.open(
-                "default.PNG").resize((100, 100), Image.ANTIALIAS))
-        self.picture = Label(self.akun, image=self.img,
-                             anchor="nw", height=90, width=100)
-        self.picture.pack(side=TOP, fill="both", padx=20)
+        ## profile picture
+        #stringimg = usernameS + ".png"
+        #try:
+        #   self.img = ImageTk.PhotoImage(Image.open(
+        #        stringimg).resize((100, 100), Image.ANTIALIAS))
+        #except:
+        #    self.img = ImageTk.PhotoImage(Image.open(
+        #        "default.PNG").resize((100, 100), Image.ANTIALIAS))
+        #self.picture = Label(self.akun, image=self.img,
+        #                     anchor="nw", height=90, width=100)
+        #self.picture.pack(side=TOP, fill="both", padx=20)
 
         # Line
         self.line1 = Canvas(self.akun, height=10, width=400)
@@ -107,17 +107,17 @@ class AkunTutor:
         self.akun.geometry('500x500')
         self.getData(usernameS)
         self.usernameS = usernameS
-        # profile picture
-        stringimg = usernameS + ".png"
-        try:
-            self.img = ImageTk.PhotoImage(Image.open(
-                stringimg).resize((100, 100), Image.ANTIALIAS))
-        except:
-            self.img = ImageTk.PhotoImage(Image.open(
-                "default.PNG").resize((100, 100), Image.ANTIALIAS))
-        self.picture = Label(self.akun, image=self.img,
-                             anchor="nw", height=90, width=100)
-        self.picture.pack(side=TOP, fill="both", padx=10)
+        ## profile picture
+        #stringimg = usernameS + ".png"
+        #try:
+        #    self.img = ImageTk.PhotoImage(Image.open(
+        #        stringimg).resize((100, 100), Image.ANTIALIAS))
+        #except:
+        #    self.img = ImageTk.PhotoImage(Image.open(
+        #        "default.PNG").resize((100, 100), Image.ANTIALIAS))
+        #self.picture = Label(self.akun, image=self.img,
+        #                     anchor="nw", height=90, width=100)
+        #self.picture.pack(side=TOP, fill="both", padx=10)
 
         # Line
         self.line1 = Canvas(self.akun, height=10, width=400)
@@ -149,7 +149,7 @@ class AkunTutor:
         self.rating.grid(row=3, column=0, sticky="w")
 
         self.update = Button(self.frame1, text="Update Info",
-                             pady=5, command=self.update)
+                             pady=5, command=self.updateAkun)
         self.update.grid(row=4, column=1, sticky="e")
 
         # #-------------Frame 2-----------
@@ -183,7 +183,7 @@ class AkunTutor:
         self.edu = Label(self.frame4, text=self.pendidikanS, font="Arial 10")
         self.edu.grid(sticky="w")
 
-    def update(self):
+    def updateAkun(self):
         app2 = UpdateAkun(self.usernameS)
         app2.run()
         username = self.usernameS
@@ -352,13 +352,13 @@ class UpdateAkun:
                            padx=5, command=self.exit_btn)
         self.back.grid(row=0, column=1, sticky="e")
         self.update = Button(self.frame3, text="Submit",
-                             padx=5, command=self.update)
+                             padx=5, command=self.updateAkun)
         self.update.grid(row=0, column=2, sticky="n")
 
     def exit_btn(self):
         self.akun.destroy()
 
-    def update(self):
+    def updateAkun(self):
         con = mysql.connect(host="localhost", user="root",
                             password="", database="tutorin")
         cursor = con.cursor()
