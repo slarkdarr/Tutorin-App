@@ -55,15 +55,6 @@ frame6.place(relwidth=0.9, relheight=0.6, relx=0.05, rely=0.35)
 frame7 = tk.Frame(main, bg = '#80c1ff', bd = 2)
 frame7.place(relwidth=0.9, relheight=0.9, relx=0.05, rely=0.05)
 
-
-
-
-
-
-
-
-
-
 #==============frame1===================
 label1 = tk.Label(frame, text="Form Jadwal Tutor", bg = '#80c1ff', font=50)
 label1.place(relx=0.4, rely=0)
@@ -197,7 +188,11 @@ buttonf1.place(relx=0.75, rely=0.1)
 buttonf2 = tk.Button(frame2, text="Add Schedule", bd=2, command=lambda:raise_frame(frame))
 buttonf2.place(relx=0.75, rely=0.93)
 
-buttonf3 = tk.Button(frame2, text="Delete Selected Schedule", bd=2, command=lambda:deleteJadwal(mylist2, varid.get()))
+# fungsi antara
+def deleteSchedule(): 
+    deleteJadwal(mylist2, varid.get())
+
+buttonf3 = tk.Button(frame2, text="Delete Selected Schedule", bd=2, command=deleteSchedule)
 buttonf3.place(relx=0.5, rely=0.93)
 
 button2 = tk.Button(frame2, text="Back", bd=2, command=lambda:raise_frame(frame4))

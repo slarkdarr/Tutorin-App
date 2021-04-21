@@ -188,3 +188,9 @@ def checkDatabaseJadwal(id,courseid,hari,jam,durasi,desc):
 
     conn.commit()
     conn.close()
+
+def checkTampilanSchedule(list, id):
+    showSchedule(list,id)
+    if(list.size == 0):
+        return 0 #listbox kosong, pencarian tidak berhasil
+    return 1 #pencarian berhasil
