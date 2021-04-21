@@ -1,6 +1,12 @@
 from jadwalTutor import *
 from searchTutor import *
+import sys
+import os
 
+if os.environ.get('DISPLAY','') == '':
+    print('no display found. Using :0.0')
+    os.environ.__setitem__('DISPLAY', ':0.0')
+    
 #test getIntJam
 assert(getIntJam("08.00 WIB")==8)
 assert(getIntJam("10.00 WIB")==10)
