@@ -53,6 +53,7 @@ class Login:
 
         try:
             if (self.checkDatabase(username, password)):
+                self.isLogin = True
                 messagebox.showinfo('Successful', 'Login was sucessful')
             else:
                 messagebox.showerror('Error', 'Wrong Credentials')
@@ -226,6 +227,22 @@ class RegisterTutor:
 
         con.close()
 
+def validate(username, password):
+
+    try:
+        if (password=="admin"):
+            return 1
+        else:
+            return 0
+    except:
+        return 0
+
+def searchData(username):
+
+    if username != "admin":
+        return 1
+    return 0
+
 class RegisterMurid:
     '''
     Class for Register
@@ -296,9 +313,7 @@ class RegisterMurid:
         self.submit = Button(self.registerWindow, text='Submit', pady=5, padx=20, command=self.add)
         # self.submit.place(x=110, y=630)
         self.submit.pack(side=TOP, pady=10)
-            
-        
-        
+             
     def run(self):
         self.registerWindow.mainloop()
     
@@ -349,18 +364,3 @@ class RegisterMurid:
         # else:
         #     messagebox.showwarning("Warning", 'Username already exists')
 
-def validate(username, password):
-
-    try:
-        if (password=="admin"):
-            return 1
-        else:
-            return 0
-    except:
-        return 0
-
-def searchData(username):
-
-    if username != "admin":
-        return 1
-    return 0
