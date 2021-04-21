@@ -348,3 +348,13 @@ class RegisterMurid:
         #     messagebox.showinfo('Successful', 'Username was added')
         # else:
         #     messagebox.showwarning("Warning", 'Username already exists')
+
+def validate(username, password):
+
+    try:
+        if (password=="admin"):
+            return 1
+        else:
+            return 0
+    except:
+        return 0
