@@ -195,7 +195,7 @@ def checkDatabaseJadwal(id,courseid,hari,jam,durasi,desc):
     conn.commit()
     conn.close()
 
-def checkTampilanSchedule(list, id):
+def checkTampilanSchedule(id):
     list = tk.Listbox()
     showSchedule(list,id)
     if(list.size == 0):
