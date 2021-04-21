@@ -5,6 +5,7 @@ import csv
 import sqlite3
 from tkinter.ttk import Combobox
 import mysql.connector as mysql 
+from tkinter import *
 # import sys
 # import os
 

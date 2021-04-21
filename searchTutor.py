@@ -3,6 +3,7 @@ import csv
 from tkinter.ttk import Combobox
 from tkinter import messagebox
 import sqlite3
+from tkinter import *
 # import sys
 # import os
 
