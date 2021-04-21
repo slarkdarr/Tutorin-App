@@ -15,7 +15,7 @@ stages:
 pylint:
   stage: Static Analysis
   script:
-  - pylint --disable=C,W,R *.py
+  - pylint --disable=C,W,R,E *.py
 
 pytest:
   stage: Test
