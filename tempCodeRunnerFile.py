@@ -1,1 +1,1 @@
-aster = main
+mylist

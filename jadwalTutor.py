@@ -119,7 +119,7 @@ def showSchedule(list, textf1) :
     
 
     #tampilkan schedule dari tutor
-    print(textf1)
+    #print(textf1)
     id = textf1
 
     #ambil data jadwal

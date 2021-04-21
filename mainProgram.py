@@ -173,35 +173,35 @@ labelf1.place(relx=0.4, rely=0)
 labelf2 = tk.Label(frame2, text='My ID', font=40, bg = '#80c1ff')
 labelf2.place(relx=0.1, rely=0.1)
 
-textboxf1 = tk.Entry(frame2, font=25)
+varid = tk.StringVar()
+textboxf1 = tk.Entry(frame2, font=25, textvariable = varid)
 textboxf1.place(relx=0.2, rely=0.1, relwidth=0.5)
 
 scrollbar = tk.Scrollbar(frame2, orient=tk.VERTICAL)
 scrollbar.place(relx=0.05, rely=0.2, relwidth=0.9, relheight=0.7)
 
-mylist = tk.Listbox(frame2, yscrollcommand = scrollbar.set, font=40 )
-mylist.place(relx=0.05, rely=0.2, relwidth=0.9, relheight=0.7)
+mylist2 = tk.Listbox(frame2, yscrollcommand = scrollbar.set, font=40 )
+mylist2.place(relx=0.05, rely=0.2, relwidth=0.9, relheight=0.7)
+#mylist.insert(tk.END,'1')
 
-scrollbar.config( command = mylist.yview )
+scrollbar.config(command = mylist2.yview)
 
 # fungsi antara
-def textboxf1F(): 
-    showSchedule(mylist, textboxf1.get())
+def ScheduleShow(): 
+    showSchedule(mylist2, varid.get())
 
-buttonf1 = tk.Button(frame2, text="Submit", bd=2, command=textboxf1F)
+buttonf1 = tk.Button(frame2, text="Submit", bd=2, command=ScheduleShow)
 buttonf1.place(relx=0.75, rely=0.1)
 # print(textboxf1.get())
 
 buttonf2 = tk.Button(frame2, text="Add Schedule", bd=2, command=lambda:raise_frame(frame))
 buttonf2.place(relx=0.75, rely=0.93)
 
-buttonf3 = tk.Button(frame2, text="Delete Selected Schedule", bd=2, command=lambda:deleteJadwal(mylist))
+buttonf3 = tk.Button(frame2, text="Delete Selected Schedule", bd=2, command=lambda:deleteJadwal(mylist2))
 buttonf3.place(relx=0.5, rely=0.93)
 
 button2 = tk.Button(frame2, text="Back", bd=2, command=lambda:raise_frame(frame4))
 button2.place(relx=0.25, rely=0.93)
-
-
 
 # #==============frame5===================
 #judul
@@ -307,11 +307,11 @@ for i in arrays:
     tv.insert('', 'end', values=i)
 
 # fungsi antara
-def textboxf1F(): 
-    showSchedule(mylist, textboxf1.get())
+# def textboxf1F(): 
+#     showSchedule(mylist, textboxf1.get())
 
-buttonf1 = tk.Button(frame7, text="Submit", bd=2, command=textboxf1F)
-buttonf1.place(relx=0.8, rely=0.2)
+# buttonf1 = tk.Button(frame7, text="Submit", bd=2, command=textboxf1F)
+# buttonf1.place(relx=0.8, rely=0.2)
 button2 = tk.Button(frame7, text="Back", bd=2, command=lambda:raise_frame(frame4))
 button2.place(relx=0.8, rely=0.9)
 # print(textboxf1.get())
