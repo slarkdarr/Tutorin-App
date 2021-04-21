@@ -3,22 +3,6 @@ import mysql.connector as mysql
 from pembayaran import *
 from pemesanan import *
 
-def test_orderConfirmation():
-	order = True
-	assert(testingPemesanan(order), True)	# Testing Konfirmasi Pemesanan
-
-def test_orderCancelation():
-	order = False
-	assert(testingPemesanan(order), False)	# Testing Pembatalan Pemesanan
-
-def test_confirmationPembayaran():
-	confirmation = True
-	assert(testingPembayaran(confirmation), True)	# Testing Konfirmasi Pembayaran
-
-def test_cancelationPembayaran():
-	confirmation = False
-	assert(testingPembayaran(confirmation), False)	# Testing Pembatalan Pembayaran
-
 def test_insertToPemesanan1():			# Testing Insert to Database Pemesanan
 	assert(insertPemesanan(39208329, 92018527, 48290129, "Rudi", "Matematika", "SMA", "Tingkat 3", "Jum'at"), True)
 

@@ -118,10 +118,6 @@ def makeForm():
 	app.modifyStatusPembayaran(True)
 	app.mainloop()
 
-def testingPembayaran(confirmation):
-	# Konfirmasi pembayaran
-	return confirmation == True
-
 def insertFormPembayaran(orderID, muridID, tutorID, courseID, waktuMengajar, Nominal, statusPembayaran):
 	# Prevent data duplication
 	return orderID != 12345678

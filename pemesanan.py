@@ -82,9 +82,6 @@ def makeForm():
 	app = Pemesanan(master=window)
 	app.mainloop()
 
-def testingPemesanan(order):
-	return order == True
-
 def insertPemesanan(orderID, muridID, tutorID, tutorName, mataPelajaran, jenjang, tingkat, hari):
 	# Prevent data duplication
 	return orderID != 12345678
