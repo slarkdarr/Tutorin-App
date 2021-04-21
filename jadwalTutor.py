@@ -61,7 +61,10 @@ def message(title, text):
    tk.MessageBox.showinfo(title, text)
 
 def saveForm(textbox1, textbox3, varje, varting, varmapel, vardur, varhari, varjam, textbox4): 
-    conn = mysql.connect(host="localhost", user="root", password="", database="tutorin")
+    # conn = mysql.connect(host="localhost", user="root", password="", database="tutorin")
+    # c = conn.cursor()
+
+    conn = sqlite3.connect('Tutorin.db')
     c = conn.cursor()
 
     id = textbox1
