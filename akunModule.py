@@ -13,17 +13,17 @@ class AkunMurid:
         self.akun.geometry('335x250')
         self.getData(usernameS)
 
-        # profile picture
-        stringimg = usernameS + ".png"
-        try:
-            self.img = ImageTk.PhotoImage(Image.open(
-                stringimg).resize((100, 100), Image.ANTIALIAS))
-        except:
-            self.img = ImageTk.PhotoImage(Image.open(
-                "default.PNG").resize((100, 100), Image.ANTIALIAS))
-        self.picture = Label(self.akun, image=self.img,
-                             anchor="nw", height=90, width=100)
-        self.picture.pack(side=TOP, fill="both", padx=20)
+        # # profile picture
+        # stringimg = usernameS + ".png"
+        # try:
+        #     self.img = ImageTk.PhotoImage(Image.open(
+        #         stringimg).resize((100, 100), Image.ANTIALIAS))
+        # except:
+        #     self.img = ImageTk.PhotoImage(Image.open(
+        #         "default.PNG").resize((100, 100), Image.ANTIALIAS))
+        # self.picture = Label(self.akun, image=self.img,
+        #                      anchor="nw", height=90, width=100)
+        # self.picture.pack(side=TOP, fill="both", padx=20)
 
         # Line
         self.line1 = Canvas(self.akun, height=10, width=400)
@@ -75,16 +75,16 @@ class AkunTutor:
         self.getData(usernameS)
         self.usernameS = usernameS
         # profile picture
-        stringimg = usernameS + ".png"
-        try:
-            self.img = ImageTk.PhotoImage(Image.open(
-                stringimg).resize((100, 100), Image.ANTIALIAS))
-        except:
-            self.img = ImageTk.PhotoImage(Image.open(
-                "default.PNG").resize((100, 100), Image.ANTIALIAS))
-        self.picture = Label(self.akun, image=self.img,
-                             anchor="nw", height=90, width=100)
-        self.picture.pack(side=TOP, fill="both", padx=10)
+        # stringimg = usernameS + ".png"
+        # try:
+        #     self.img = ImageTk.PhotoImage(Image.open(
+        #         stringimg).resize((100, 100), Image.ANTIALIAS))
+        # except:
+        #     self.img = ImageTk.PhotoImage(Image.open(
+        #         "default.PNG").resize((100, 100), Image.ANTIALIAS))
+        # self.picture = Label(self.akun, image=self.img,
+        #                      anchor="nw", height=90, width=100)
+        # self.picture.pack(side=TOP, fill="both", padx=10)
 
         # Line
         self.line1 = Canvas(self.akun, height=10, width=400)

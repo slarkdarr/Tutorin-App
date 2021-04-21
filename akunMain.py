@@ -7,5 +7,8 @@ import mysql.connector as mysql
 
 from akunModule import AkunMurid, AkunTutor, UpdateAkun
 
-app = AkunTutor("dwi")
-app.run()
+def editRun() :
+    app = AkunTutor("dwi")
+    app.run()
+
+
