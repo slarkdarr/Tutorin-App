@@ -1,5 +1,5 @@
 import pytest
-from loginModule import *
+from loginModule import searchData,validate
 import mysql.connector as mysql
 
 
