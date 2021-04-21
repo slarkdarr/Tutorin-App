@@ -176,12 +176,9 @@ class jadwalTutor:
             value = 20
         return value
 
-    def PrintArray(self, arr):
-        for x in arr:
-            print(x)
-
     def getID(self, data, mapel, ting, jen):
         for x in data:
+            #print(x)
             if(x[1] == mapel and x[2] == jen and x[3] == ting):
                 return x[0]
         return 0
