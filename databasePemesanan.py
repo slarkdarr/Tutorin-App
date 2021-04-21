@@ -6,13 +6,13 @@ class PemesananDB:
 		self.cursor = self.conn.cursor()
 
 	# Insert data in the form to database
-	def insertToDatabase(self, tutorID, tutorName, mataPelajaran, jenjang, tingkat, hari):
+	def insertToDatabase(self, orderID, muridID, tutorID, tutorName, mataPelajaran, jenjang, tingkat, hari):
 		self.dbPemesanan = """
 		INSERT INTO Pemesanan
-		VALUES(%s, %s, %s, %s, %s, %s)
+		VALUES(%s, %s, %s, %s, %s, %s, %s, %s)
 		"""
 
-		self.dataPemesanan = (tutorID, tutorName, mataPelajaran, jenjang, tingkat, hari)
+		self.dataPemesanan = (orderID, muridID, tutorID, tutorName, mataPelajaran, jenjang, tingkat, hari)
 
 		try:
 			# Eksekusi command SQL
