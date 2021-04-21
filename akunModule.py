@@ -3,8 +3,6 @@ from tkinter import messagebox
 from tkinter.ttk import Combobox
 import mysql.connector as mysql
 import math
-from PIL import ImageTk, Image
-
 
 class AkunMurid:
     def __init__(self, usernameS):
