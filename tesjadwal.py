@@ -1,4 +1,5 @@
-from mainProgram import *
+from jadwalTutor import *
+from searchTutor import *
 
 #test getIntJam
 assert(getIntJam("08.00 WIB")==8)
