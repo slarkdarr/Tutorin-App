@@ -299,5 +299,5 @@ class jadwalTutor:
         self.raise_frame(self.frame2)
         self.jadwal.mainloop()
 
-e = jadwalTutor()
-e.run()
+# e = jadwalTutor()
+# e.run()
