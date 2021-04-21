@@ -3,12 +3,12 @@ import csv
 from tkinter.ttk import Combobox
 from tkinter import messagebox
 import sqlite3
-import sys
-import os
+# import sys
+# import os
 
-if os.environ.get('DISPLAY','') == '':
-    print('no display found. Using :0.0')
-    os.environ.__setitem__('DISPLAY', ':0.0')
+# if os.environ.get('DISPLAY','') == '':
+#     print('no display found. Using :0.0')
+#     os.environ.__setitem__('DISPLAY', ':0.0')
 
 def searchTutor(list, varje, varting, varmapel, varhari):
    conn = sqlite3.connect('Tutorin.db')
@@ -88,7 +88,8 @@ def searchTutor(list, varje, varting, varmapel, varhari):
 def konfirmasiPemesanan():
    MsgBox = messagebox.askquestion("askquestion", "Apakah Ada Yakin Ingin Melakukan Pemesanan?")
 
-def checkSearch(list, varje, varting, varmapel, varhari):
+def checkSearch(varje, varting, varmapel, varhari):
+   list = tk.Listbox()
    searchTutor(list, varje, varting, varmapel, varhari)
    if(list.size == 0):
       return 0 #listbox kosong, pencarian tidak berhasil

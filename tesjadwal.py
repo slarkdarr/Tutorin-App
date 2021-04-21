@@ -1,11 +1,11 @@
 from jadwalTutor import *
 from searchTutor import *
-import sys
-import os
+# import sys
+# import os
 
-if os.environ.get('DISPLAY','') == '':
-    print('no display found. Using :0.0')
-    os.environ.__setitem__('DISPLAY', ':0.0')
+# if os.environ.get('DISPLAY','') == '':
+#     print('no display found. Using :0.0')
+#     os.environ.__setitem__('DISPLAY', ':0.0')
     
 #test getIntJam
 assert(getIntJam("08.00 WIB")==8)
@@ -28,10 +28,10 @@ data3 = (7, 'Matematika', 'SMA', 1)
 assert(getID2(data,data2)==16)
 assert(getID2(data,data3)==7)
 
-list2 = tk.Listbox()
+
 #test showSchedule
-assert(checkTampilanSchedule(list2,12)==1)
-assert(checkTampilanSchedule(list2,1111)==0)
+assert(checkTampilanSchedule(12)==1)
+assert(checkTampilanSchedule(1111)==0)
 
 #test saveForm
 saveForm(13, 'saya', 1, 3, 'Matematika', 1, 'Selasa', '09.00 WIB', "Hai")
@@ -40,7 +40,5 @@ assert(checkDatabaseJadwal(11111,12,'Selasa','09.00 WIB',1,"Tidak ada")==0)
 
 #test deleteSchedule
 #test searchTutor
-list1 = tk.Listbox()
-#list, varje, varting, varmapel, varhari):
-assert(checkSearch(list1,1,3,'Matematika','Selasa')==1) #untuk yg berhasil
-assert(checkSearch(list1,1,3,'','')==0) #untuk yg tidak berhasil
+assert(checkSearch(1,3,'Matematika','Selasa')==1) #untuk yg berhasil
+assert(checkSearch(1,3,'','')==0) #untuk yg tidak berhasil

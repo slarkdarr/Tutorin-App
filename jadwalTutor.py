@@ -4,12 +4,12 @@ import csv
 import sqlite3
 from tkinter.ttk import Combobox
 import mysql.connector as mysql 
-import sys
-import os
+# import sys
+# import os
 
-if os.environ.get('DISPLAY','') == '':
-    print('no display found. Using :0.0')
-    os.environ.__setitem__('DISPLAY', ':0.0')
+# if os.environ.get('DISPLAY','') == '':
+#     print('no display found. Using :0.0')
+#     os.environ.__setitem__('DISPLAY', ':0.0')
 
 def getIntJam(jam):
     value = 0
@@ -196,6 +196,7 @@ def checkDatabaseJadwal(id,courseid,hari,jam,durasi,desc):
     conn.close()
 
 def checkTampilanSchedule(list, id):
+    list = tk.Listbox()
     showSchedule(list,id)
     if(list.size == 0):
         return 0 #listbox kosong, pencarian tidak berhasil
