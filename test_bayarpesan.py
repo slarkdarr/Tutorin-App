@@ -4,16 +4,20 @@ from pembayaran import *
 from pemesanan import *
 
 def test_orderConfirmation():
-	assert(testingPemesanan(True), True)	# Testing Konfirmasi Pemesanan
+	order = True
+	assert(testingPemesanan(order), True)	# Testing Konfirmasi Pemesanan
 
 def test_orderCancelation():
-	assert(testingPemesanan(False), False)	# Testing Pembatalan Pemesanan
+	order = False
+	assert(testingPemesanan(order), False)	# Testing Pembatalan Pemesanan
 
 def test_confirmationPembayaran():
-	assert(testingPembayaran(True), True)	# Testing Konfirmasi Pembayaran
+	confirmation = True
+	assert(testingPembayaran(confirmation), True)	# Testing Konfirmasi Pembayaran
 
 def test_cancelationPembayaran():
-	assert(testingPembayaran(False), False)	# Testing Pembatalan Pembayaran
+	confirmation = False
+	assert(testingPembayaran(confirmation), False)	# Testing Pembatalan Pembayaran
 
 def test_insertToPemesanan1():			# Testing Insert to Database Pemesanan
 	assert(insertPemesanan(39208329, 92018527, 48290129, "Rudi", "Matematika", "SMA", "Tingkat 3", "Jum'at"), True)
