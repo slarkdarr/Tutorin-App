@@ -10,7 +10,7 @@ class Login:
     @param username
     @param password
     '''
-    def __init__(self, usernameS, passwordS):
+    def __init__(self):
         '''
         Class Init Method for GUI
         :params — loginWindow, label, username
